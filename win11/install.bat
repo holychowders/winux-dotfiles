@@ -1,3 +1,5 @@
+@echo off
+
 mklink C:\Users\holychowders\.vimrc C:\Users\holychowders\docs\cs\WinuxDotfiles\common\home\.vimrc
 mklink C:\Users\holychowders\.gitconfig C:\Users\holychowders\docs\cs\WinuxDotfiles\common\home\.gitconfig
 mklink C:\Users\holychowders\.glzr\glazewm\config.yaml C:\Users\holychowders\docs\cs\WinuxDotfiles\win11\home\.glzr\glazewm\config.yaml
