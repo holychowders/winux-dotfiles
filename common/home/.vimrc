@@ -126,8 +126,9 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 " Highlighting
 "" Enable basic syntax highlighting and dark mode
+set notermguicolors " Don't use GUI colors, just use the cterm colors
 if has("syntax")
-  syntax on " for plugins
+  syntax on
 endif
 set background=dark
 color retrobox
