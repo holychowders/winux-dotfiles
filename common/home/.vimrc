@@ -126,14 +126,16 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 " Highlighting
 "" Enable basic syntax highlighting and dark mode
-set notermguicolors " Don't use GUI colors, just use the cterm colors
+if has("termguicolors")
+    set termguicolors " TODO: Configure GUI colors
+endif
 if has("syntax")
   syntax on
 endif
 set background=dark
 color retrobox
 
-hi Normal ctermbg=none
+hi Normal ctermbg=none guibg=none
 
 hi StatusLine ctermfg=darkgrey ctermbg=none cterm=none
 hi StatusLineNC ctermfg=darkgrey ctermbg=none cterm=none
