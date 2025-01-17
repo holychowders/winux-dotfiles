@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Error handling
+# TODO: Look into best practices with these things
+set -e  # Quit script with last error code when a command fails
+set -o pipefail  # Fail pipe when it finishes if a command within it failed
+set -u  # Fail when a command uses an unbound variable
+
 # Set directory variables
 dotfiles_dir="$HOME/docs/cs/headless-ubuntu-dotfiles"
 bashrc_dir="$dotfiles_dir/home/.config/bashrc"
