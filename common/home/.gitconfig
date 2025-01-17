@@ -1,0 +1,80 @@
+[include]
+  path = ~/themes.gitconfig
+
+[user]
+  name = holychowders
+  email = theholychowders@gmail.com
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[core]
+  # NOTE: --diff-so-fancy emulates diff-so-fancy, so other delta themes specified won't be applied
+  #pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta --diff-so-fancy
+
+[commit]
+  verbose = true
+
+[pull]
+  rebase = true
+
+[merge]
+  ff = only
+  conflictstyle = diff3
+
+[rebase]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = true
+
+[interactive]
+  #diffFilter = diff-so-fancy --patch
+  # FIXME
+  diffFilter = delta --color-only --features=interactive
+
+[alias]
+  s = status
+  a = add -u
+  c = commit -a
+  ca = commit -a --amend --no-edit
+  d = diff
+  ds = diff --staged
+  l = log --oneline
+
+[delta]
+  # Not enabled if using `delta --diff-so-fancy` as diff command
+  features = chameleon
+  #features = villsau
+
+  navigate = true # n and N to move to next/previous commit in git log or file in git diff
+  line-numbers = true
+  side-by-side = false
+
+[color]
+  ui = true
+
+[color "diff-highlight"]
+  oldNormal = yellow
+  oldHighlight = black brightred
+
+  newNormal = yellow
+  newHighlight = black green
+
+[color "diff"]
+  commit = bold yellow
+  meta = bold yellow
+  frag = magenta
+
+  old = brightred
+  new = brightgreen
+  whitespace = 109 reverse
+
+[color "status"]
+  added = brightgreen
+  changed = red
+  untracked = yellow
