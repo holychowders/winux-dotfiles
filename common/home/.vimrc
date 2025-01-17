@@ -128,7 +128,6 @@ if has("syntax")
   syntax on " for plugins
 endif
 set background=dark
-
 color retrobox
 
 hi Normal ctermbg=none
@@ -170,10 +169,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     execute '!curl -fLo' expand('~/.vim/autoload/plug.vim --create-dirs ') . 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     execute 'source' expand('~/.vim/autoload/plug.vim')
     echo "vim-plug installed successfully! Run PlugInstall to install plugins."
+else
+    execute 'source' expand('~/.vim/autoload/plug.vim')
 endif
 
+
 "" Initialize vim-plug plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin(expand('~/.vim/plugged'))
 "Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
