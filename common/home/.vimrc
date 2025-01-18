@@ -159,6 +159,7 @@ hi GitGutterChange ctermfg=darkgrey
 
 " Plugins
 packadd termdebug
+let termdebug_wide=1
 
 "" Init Whitebox
 if !empty(glob('~/docs/bin/whitebox/editor_plugins/whitebox-vim/plugin/whitebox.vim'))
@@ -221,7 +222,7 @@ nnoremap <leader>o :Explore<CR>
 nnoremap <leader>p :bp<CR>
 
 "" Build scripts and quickfix
-nnoremap <F2> :Termdebug<CR>
+nnoremap <F1> :Termdebug<CR>
 
 if has("win32") || has("win64") " Windows path seperators
   set makeprg=tools\\build

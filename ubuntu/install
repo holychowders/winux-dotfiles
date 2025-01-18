@@ -10,12 +10,9 @@ set -u  # Fail when a command uses an unbound variable
 dotfiles_dir="$HOME/docs/cs/WinuxDotfiles"
 bashrc_dir="$dotfiles_dir/ubuntu/home/.config/bashrc"
 
-# Create directories
+# Set directory creation commands
 mkdir_bin="mkdir -p $HOME/docs/bin"
 mkdir_config="mkdir -p $HOME/.config"
-
-eval $mkdir_bin
-eval $mkdir_config
 
 # Startup message
 echo Running install script for WinuxDotfiles/ubuntu
@@ -33,13 +30,32 @@ for arg in "$@"; do
 done
 echo
 
+# Create required directories
+echo Creating required directories
+echo $mkdir_bin
+if [ $dry_run = false ]; then
+    eval $mkdir_bin
+fi
+
+echo $mkdir_config
+if [ $dry_run = false ]; then
+    eval $mkdir_config
+fi
+echo
+
 # Install packages
-apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb"
+apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb"
 snap_packages="glow gh"
 
 ## Apt packages
 echo Upgrading apt packages
-sudo apt update && sudo apt upgrade
+apt_upgrade_cmd="sudo apt update && sudo apt upgrade -y"
+echo $apt_upgrade_cmd
+if [ $dry_run = false ]; then
+    eval $apt_upgrade_cmd
+fi
+echo
+
 echo Installing apt packages
 for pkg in $apt_packages; do
     cmd="sudo apt install -y $pkg"
@@ -108,6 +124,14 @@ vimrc_cmd="ln -svi $dotfiles_dir/common/home/.vimrc $HOME/.vimrc"
 echo "$vimrc_cmd"
 if [ $dry_run = false ]; then
     eval $vimrc_cmd
+fi
+echo
+
+## gdb
+gdb_cmd="ln -svi $dotfiles_dir/ubuntu/home/.gdbinit $HOME/.gdbinit"
+echo "$gdb_cmd"
+if [ $dry_run = false ]; then
+    eval $gdb_cmd
 fi
 echo
 
