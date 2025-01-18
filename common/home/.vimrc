@@ -37,6 +37,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+set autoindent
 set smartindent
 
 " Searching
@@ -126,16 +127,14 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 " Highlighting
 "" Enable basic syntax highlighting and dark mode
-if has("termguicolors")
-    set termguicolors " TODO: Configure GUI colors
-endif
+set notermguicolors " TODO: Configure GUI colors
 if has("syntax")
   syntax on
 endif
 set background=dark
 color retrobox
 
-hi Normal ctermbg=none guibg=none
+hi Normal ctermbg=none
 
 hi StatusLine ctermfg=darkgrey ctermbg=none cterm=none
 hi StatusLineNC ctermfg=darkgrey ctermbg=none cterm=none
