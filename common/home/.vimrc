@@ -226,7 +226,7 @@ nnoremap <leader>o :Explore<CR>
 nnoremap <leader>p :bp<CR>
 
 "" Build scripts and quickfix
-nnoremap <F1> :Termdebug<CR>
+nnoremap <F1> :make<CR>:Termdebug .build/out<CR>
 
 if has("win32") || has("win64") " Windows path seperators
   set makeprg=tools\\build
