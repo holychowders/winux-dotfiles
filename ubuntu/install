@@ -135,6 +135,14 @@ if [ $dry_run = false ]; then
 fi
 echo
 
+## cgdb
+cgdb_cmd="ln -svi $dotfiles_dir/ubuntu/home/.cgdb/cgdbrc $HOME/.cgdb/cgdbrc"
+echo "$cgdb_cmd"
+if [ $dry_run = false ]; then
+    eval $cgdb_cmd
+fi
+echo
+
 # Finishing message
 echo Install script finished
 if [ $dry_run = true ]; then
