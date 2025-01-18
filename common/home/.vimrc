@@ -230,14 +230,14 @@ nnoremap <F1> :make<CR>:Termdebug .build/out<CR>
 
 if has("win32") || has("win64") " Windows path seperators
   set makeprg=tools\\build
-  nnoremap <F5> :!tools\\debug<CR>
-  nnoremap <F6> :!tools\\format<CR>
+  nnoremap <F5> :!tools\\format<CR>
+  nnoremap <F6> :!tools\\check<CR>
   nnoremap <F7> :!tools\\build<CR>
   nnoremap <F8> :!tools\\run<CR>
 else " Unix path seperators
   set makeprg=tools/build
-  nnoremap <F5> :!tools/debug<CR>
-  nnoremap <F6> :!tools/format<CR>
+  nnoremap <F5> :!tools/format<CR>
+  nnoremap <F6> :!tools/check<CR>
   nnoremap <F7> :!tools/build<CR>
   nnoremap <F8> :!tools/run<CR>
 endif
