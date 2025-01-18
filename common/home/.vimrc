@@ -159,7 +159,8 @@ hi GitGutterChange ctermfg=darkgrey
 
 " Plugins
 packadd termdebug
-let termdebug_wide=1
+let termdebug_wide=0
+let termdebugger='gdb'
 
 "" Init Whitebox
 if !empty(glob('~/docs/bin/whitebox/editor_plugins/whitebox-vim/plugin/whitebox.vim'))
