@@ -119,6 +119,7 @@ set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 set clipboard=unnamedplus
 
 " File stuff
+set autoread
 filetype plugin on
 autocmd FileType * setlocal formatoptions-=ro " Disable continuing comments on line return and opening new lines before/after comments
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return cursor to last position on open
