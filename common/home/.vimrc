@@ -33,8 +33,9 @@
 "     Python
 
 " Tabbing and Spaces
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 set smarttab
 set smartindent
 
