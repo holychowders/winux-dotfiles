@@ -161,16 +161,24 @@ au WinLeave * set nocursorline
 au WinEnter * set cursorline
 
 "" Searching
-hi Search ctermfg=214 ctermbg=black
-hi IncSearch ctermfg=214 ctermbg=black
-hi CurSearch ctermfg=214 ctermbg=black cterm=reverse
+hi Search ctermfg=black ctermbg=white cterm=none
+hi IncSearch ctermfg=black ctermbg=white cterm=bold
+hi CurSearch ctermfg=black ctermbg=white cterm=bold
 
 "" Diffing
 hi SignColumn ctermbg=none
 
-hi DiffAdd ctermfg=lightgreen
+""" Vim diffing
+hi DiffAdd ctermfg=green
 hi DiffDelete ctermfg=red
-hi DiffChange ctermfg=lightblue
+hi DiffChange ctermfg=blue
+
+""" Commit messages
+hi DiffAdded ctermfg=green
+hi DiffRemoved ctermfg=red
+hi DiffChanged ctermfg=blue
+
+""" GitGutter
 hi GitGutterAdd ctermfg=237 ctermbg=none
 hi GitGutterDelete ctermfg=237 ctermbg=none
 hi GitGutterChange ctermfg=237 ctermbg=none
