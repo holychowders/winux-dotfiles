@@ -73,12 +73,18 @@ set title
 set icon
 set belloff=all  " Please, STFU
 
-" Scrolling
+"" Scrolling and line numbers
 set number
 set norelativenumber
 
 set scrolloff=5
 set sidescrolloff=2
+
+set cursorline
+set cursorlineopt=both
+
+au WinLeave * set nocursorline
+au WinEnter * set cursorline
 
 " Time stuff
 set timeoutlen=200
@@ -128,60 +134,92 @@ autocmd FileType * setlocal formatoptions-=ro " Disable continuing comments on l
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return cursor to last position on open
 
 " Highlighting
-"" Enable basic syntax highlighting and dark mode
+" TODO: Replace color names with color codes for consistency and clarity
 set notermguicolors " TODO: Configure GUI colors
-if has("syntax")
-  syntax on
-endif
+syntax on
+
+autocmd FileType cpp call OnCppFiletype()
+function! OnCppFiletype()
+  "syntax clear  " TODO: Maybe clear syntax once we're able to smartly check different constructs.
+  hi clear
+
+  syn keyword Typedef typedef
+  syn keyword Static static internal internal_global_var internal_dynamic_func local_persist
+  syn keyword ControlFlow if else return for while
+  syn keyword Debug OutputDebugStringA DebugBreak assert Assert
+  syn keyword Type const void char int bool bool32 float size_t int8_t int16_t int32_t int64_t uint8_t uint16_t uint32_t uint64_t
+
+  "syn region String start=+\(L\|u\|u8\|U\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"\(sv\|s\|_\i*\)\=+ end='$' contains=cSpecial,cFormat,@Spell
+
+  syn match Comment "\v(//.*|/\*.\_s*\*/)"
+  "syn keyword Todo NOTE TODO FIXME
+  "syn match Docstring "//!"
+
+  " Highlights
+  hi MatchParen ctermfg=red ctermbg=none cterm=bold
+
+  hi PreProc ctermfg=lightgrey ctermbg=none cterm=none
+  hi Static ctermfg=lightblue ctermbg=none
+  hi ControlFlow ctermfg=9 ctermbg=none
+  hi Debug ctermfg=lightgrey ctermbg=none cterm=bold
+  hi Type ctermfg=darkyellow ctermbg=none
+
+  hi Constant ctermfg=blue ctermbg=none cterm=none
+
+  hi Comment ctermfg=242 ctermbg=none cterm=none
+  hi Todo ctermfg=lightgrey ctermbg=none
+  hi Docstring ctermfg=darkblue ctermbg=none
+
+  hi link Typedef PreProc
+
+endfunction
+
 set background=dark
 color retrobox
 
-" TODO: Replace color names with color codes for consistency and clarity
+autocmd Filetype * call SetHighlights()
+function! SetHighlights()
+  hi Normal ctermfg=white ctermbg=none
 
-hi Normal ctermfg=white ctermbg=none
+  hi StatusLine ctermfg=white ctermbg=none cterm=underline,bold
+  hi StatusLineNC ctermfg=lightgrey ctermbg=none cterm=underline
 
-hi StatusLine ctermfg=white ctermbg=none cterm=underline,bold
-hi StatusLineNC ctermfg=lightgrey ctermbg=none cterm=underline
+  hi QuickFixLine ctermfg=black ctermbg=107 cterm=none
+  hi StatusLineTerm ctermfg=208 ctermbg=none cterm=underline,bold
+  hi StatusLineTermNC ctermfg=130 ctermbg=none cterm=underline
 
-hi QuickFixLine ctermfg=black ctermbg=107 cterm=none
-hi StatusLineTerm ctermfg=208 ctermbg=none cterm=underline,bold
-hi StatusLineTermNC ctermfg=130 ctermbg=none cterm=underline
+  hi DebugPC ctermfg=black ctermbg=107 cterm=none
+  hi DebugBreakpoint ctermfg=black ctermbg=107 cterm=none
+  hi DebugBreakpointDisabled ctermfg=black ctermbg=red cterm=none
 
-hi DebugPC ctermfg=black ctermbg=107 cterm=none
-hi DebugBreakpoint ctermfg=black ctermbg=107 cterm=none
-hi DebugBreakpointDisabled ctermfg=black ctermbg=red cterm=none
+  "" Scrolling and line numbers
+  hi LineNr ctermfg=237
+  hi CursorLineNr ctermfg=lightgrey cterm=none
 
-"" Scrolling and line numbers
-hi LineNr ctermfg=237
-hi CursorLineNr ctermfg=lightgrey cterm=none
 
-set cursorline
-set cursorlineopt=both
-au WinLeave * set nocursorline
-au WinEnter * set cursorline
+  "" Searching
+  hi Search ctermfg=black ctermbg=white cterm=none
+  hi IncSearch ctermfg=black ctermbg=white cterm=bold
+  hi CurSearch ctermfg=black ctermbg=white cterm=bold
 
-"" Searching
-hi Search ctermfg=black ctermbg=white cterm=none
-hi IncSearch ctermfg=black ctermbg=white cterm=bold
-hi CurSearch ctermfg=black ctermbg=white cterm=bold
+  "" Diffing
+  hi SignColumn ctermbg=none
 
-"" Diffing
-hi SignColumn ctermbg=none
+  """ Vim diffing
+  hi DiffAdd ctermfg=green
+  hi DiffDelete ctermfg=red
+  hi DiffChange ctermfg=blue
 
-""" Vim diffing
-hi DiffAdd ctermfg=green
-hi DiffDelete ctermfg=red
-hi DiffChange ctermfg=blue
+  """ Commit messages
+  hi DiffAdded ctermfg=green
+  hi DiffRemoved ctermfg=red
+  hi DiffChanged ctermfg=blue
 
-""" Commit messages
-hi DiffAdded ctermfg=green
-hi DiffRemoved ctermfg=red
-hi DiffChanged ctermfg=blue
-
-""" GitGutter
-hi GitGutterAdd ctermfg=237 ctermbg=none
-hi GitGutterDelete ctermfg=237 ctermbg=none
-hi GitGutterChange ctermfg=237 ctermbg=none
+  """ GitGutter
+  hi GitGutterAdd ctermfg=237 ctermbg=none
+  hi GitGutterDelete ctermfg=237 ctermbg=none
+  hi GitGutterChange ctermfg=237 ctermbg=none
+endfunction
 
 " Plugins
 packadd termdebug
@@ -274,7 +312,6 @@ let termdebugger='gdb'
 
 nnoremap <F1> :make<CR>:Termdebug .build/out<CR>
 autocmd User TermdebugStartPost call OnTermdebugStartPost()
-"autocmd User TermdebugStopPost call OnTermdebugStopPost()
 
 function! OnTermdebugStartPost()
   " Keybinds

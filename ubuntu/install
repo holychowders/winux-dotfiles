@@ -44,7 +44,7 @@ fi
 echo
 
 # Install packages
-apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb"
+apt_packages="git git-lfs git-delta pandoc ctags gdb cgdb"
 snap_packages="glow gh"
 
 ## Apt packages
