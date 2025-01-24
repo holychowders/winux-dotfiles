@@ -276,10 +276,30 @@ nnoremap <leader>g :Rg<Space>
 nnoremap <leader>c :Commands<CR>
 nnoremap <leader>[ :Tags<CR>
 nnoremap <leader>' :Marks<CR>
-nnoremap <leader>l :Lines<CR>
+"nnoremap <leader>l :Lines<CR>
 
 " Other custom remaps
 inoremap jk <Esc><Cmd>w<CR>
+nnoremap <C-q> <Cmd>bd<CR>
+
+"" Navigation
+nnoremap <Tab> <Cmd>tabn<CR>
+nnoremap <S-Tab> <Cmd>tabp<CR>
+
+tnoremap <Tab> <Cmd>tabn<CR>
+tnoremap <S-Tab> <Cmd>tabp<CR>
+
+""" Buffer (Normal)
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+""" Buffer (Terminal)
+tnoremap <C-j> <C-w>j
+tnoremap <C-k> <C-w>k
+tnoremap <C-h> <C-w>h
+tnoremap <C-l> <C-w>l
 
 "" Explorer
 nnoremap <leader>o :Explore<CR>
@@ -292,19 +312,29 @@ if has("win32") || has("win64") " Windows path seperators
   nnoremap <F6> :!tools\\check<CR>
   nnoremap <F7> :!tools\\build<CR>
   nnoremap <F8> :!tools\\run<CR>
+
+  tnoremap <F5> tools\\format<CR>
+  tnoremap <F6> tools\\check<CR>
+  tnoremap <F7> tools\\build<CR>
+  tnoremap <F8> tools\\run<CR>
 else " Unix path seperators
   set makeprg=tools/build
   nnoremap <F5> :!tools/format<CR>
   nnoremap <F6> :!tools/check<CR>
   nnoremap <F7> :!tools/build<CR>
   nnoremap <F8> :!tools/run<CR>
+
+  tnoremap <F5> tools/format<CR>
+  tnoremap <F6> tools/check<CR>
+  tnoremap <F7> tools/build<CR>
+  tnoremap <F8> tools/run<CR>
 endif
 
-nnoremap <C-j> :make<CR>
-nnoremap <C-k> :copen<CR>
+nnoremap <leader>j :make<CR>
+nnoremap <leader>k :copen<CR>
 "nnoremap <C-k> :cclose<CR>
-nnoremap <C-h> :cprev<CR>
-nnoremap <C-l> :cnext<CR>
+nnoremap <leader>h :cprev<CR>
+nnoremap <leader>l :cnext<CR>
 
 "' Termdebug configuration
 let termdebug_wide=0
