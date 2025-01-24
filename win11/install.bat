@@ -17,5 +17,6 @@ REM Install some things
 REM winget install vim.vim
 winget install nvim
 winget install dandavison.delta
+winget install ctags
 
 wsl --install
