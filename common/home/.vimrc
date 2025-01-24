@@ -207,6 +207,7 @@ call plug#begin(expand('~/.vim/plugged'))
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-obsession'
 call plug#end()
 
 "" Set Up Plugins
