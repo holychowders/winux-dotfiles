@@ -77,18 +77,18 @@ set belloff=all  " Please, STFU
 set number
 set norelativenumber
 
-set scrolloff=5
-set sidescrolloff=2
+set scrolloff=2
+set sidescrolloff=1
 
 set cursorline
 set cursorlineopt=both
 
-au WinLeave * set nocursorline
-au WinEnter * set cursorline
+"au WinLeave * set nocursorline
+"au WinEnter * set cursorline
 
 " Time stuff
 set timeoutlen=200
-set updatetime=200 " Affects how frequently (ms) GitGutter refreshes
+set updatetime=1 " Affects how frequently (ms) GitGutter refreshes
 
 " Statusline
 set noshowmode
@@ -142,6 +142,7 @@ autocmd FileType cpp call OnCppFiletype()
 function! OnCppFiletype()
   "syntax clear  " TODO: Maybe clear syntax once we're able to smartly check different constructs.
   hi clear
+  call SetHighlights()
 
   syn keyword Typedef typedef
   syn keyword Static static internal internal_global_var internal_dynamic_func local_persist
@@ -171,22 +172,20 @@ function! OnCppFiletype()
   hi Docstring ctermfg=darkblue ctermbg=none
 
   hi link Typedef PreProc
-
 endfunction
 
 set background=dark
 color retrobox
 
-autocmd Filetype * call SetHighlights()
 function! SetHighlights()
   hi Normal ctermfg=white ctermbg=none
 
-  hi StatusLine ctermfg=white ctermbg=none cterm=underline,bold
+  hi StatusLine ctermfg=black ctermbg=white cterm=none
   hi StatusLineNC ctermfg=lightgrey ctermbg=none cterm=underline
 
   hi QuickFixLine ctermfg=black ctermbg=107 cterm=none
-  hi StatusLineTerm ctermfg=208 ctermbg=none cterm=underline,bold
-  hi StatusLineTermNC ctermfg=130 ctermbg=none cterm=underline
+  hi StatusLineTerm ctermfg=black ctermbg=107 cterm=none
+  hi StatusLineTermNC ctermfg=107 ctermbg=none cterm=underline
 
   hi DebugPC ctermfg=black ctermbg=107 cterm=none
   hi DebugBreakpoint ctermfg=black ctermbg=107 cterm=none
@@ -194,8 +193,9 @@ function! SetHighlights()
 
   "" Scrolling and line numbers
   hi LineNr ctermfg=237
-  hi CursorLineNr ctermfg=lightgrey cterm=none
-
+  hi CursorLine ctermbg=236 cterm=none
+  " 239 is also nice for ctermfg with 236 ctermbg
+  hi CursorLineNr ctermfg=lightgrey ctermbg=236 cterm=none
 
   "" Searching
   hi Search ctermfg=black ctermbg=white cterm=none
@@ -216,10 +216,12 @@ function! SetHighlights()
   hi DiffChanged ctermfg=blue
 
   """ GitGutter
-  hi GitGutterAdd ctermfg=237 ctermbg=none
-  hi GitGutterDelete ctermfg=237 ctermbg=none
-  hi GitGutterChange ctermfg=237 ctermbg=none
+  hi GitGutterAdd ctermfg=green ctermbg=none cterm=none
+  hi GitGutterDelete ctermfg=red ctermbg=none cterm=none
+  hi GitGutterChange ctermfg=blue ctermbg=none cterm=none
 endfunction
+
+call SetHighlights()
 
 " Plugins
 packadd termdebug
@@ -258,9 +260,16 @@ call plug#end()
 "
 "nnoremap <leader>[ :ALEFix<CR>
 
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '~'
-let g:gitgutter_sign_modified_removed = '_~'
+"let g:gitgutter_sign_added = '+'
+"let g:gitgutter_sign_modified = '~'
+"let g:gitgutter_sign_modified_removed = '_~'
+"let g:gitgutter_sign_removed = '_|'
+"let g:gitgutter_sign_removed_first_line = '‾|'
+"let g:gitgutter_sign_removed_above_and_below = '_‾'
+
+let g:gitgutter_sign_added = '|'
+let g:gitgutter_sign_modified = '|'
+let g:gitgutter_sign_modified_removed = '|'
 let g:gitgutter_sign_removed = '_|'
 let g:gitgutter_sign_removed_first_line = '‾|'
 let g:gitgutter_sign_removed_above_and_below = '_‾'
