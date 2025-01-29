@@ -81,7 +81,7 @@ set scrolloff=2
 set sidescrolloff=1
 
 set cursorline
-set cursorlineopt=both
+set cursorlineopt=number
 
 "au WinLeave * set nocursorline
 "au WinEnter * set cursorline
@@ -174,13 +174,14 @@ function! OnCppFiletype()
   hi link Typedef PreProc
 endfunction
 
-set background=dark
-color retrobox
 
 function! SetHighlights()
+  set background=dark
+  color retrobox
+
   hi Normal ctermfg=white ctermbg=none
 
-  hi StatusLine ctermfg=black ctermbg=white cterm=none
+  hi StatusLine ctermfg=black ctermbg=lightgrey cterm=none
   hi StatusLineNC ctermfg=lightgrey ctermbg=none cterm=underline
 
   hi QuickFixLine ctermfg=black ctermbg=107 cterm=none
@@ -195,7 +196,7 @@ function! SetHighlights()
   hi LineNr ctermfg=237
   hi CursorLine ctermbg=236 cterm=none
   " 239 is also nice for ctermfg with 236 ctermbg
-  hi CursorLineNr ctermfg=lightgrey ctermbg=236 cterm=none
+  hi CursorLineNr ctermfg=lightgrey ctermbg=none cterm=none
 
   "" Searching
   hi Search ctermfg=black ctermbg=white cterm=none
