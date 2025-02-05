@@ -81,14 +81,14 @@ set scrolloff=2
 set sidescrolloff=1
 
 set cursorline
-set cursorlineopt=number
+set cursorlineopt=both
 
 "au WinLeave * set nocursorline
 "au WinEnter * set cursorline
 
 " Time stuff
 set timeoutlen=200
-set updatetime=1 " Affects how frequently (ms) GitGutter refreshes
+set updatetime=200 " Affects how frequently (ms) GitGutter refreshes
 
 " Statusline
 set noshowmode
@@ -126,6 +126,7 @@ set hidden
 set nofixendofline
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 set clipboard=unnamedplus
+set colorcolumn=120
 
 " File stuff
 set autoread
@@ -138,7 +139,7 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 set notermguicolors " TODO: Configure GUI colors
 syntax on
 
-autocmd FileType cpp call OnCppFiletype()
+"autocmd FileType cpp call OnCppFiletype()
 function! OnCppFiletype()
   "syntax clear  " TODO: Maybe clear syntax once we're able to smartly check different constructs.
   hi clear
@@ -181,12 +182,12 @@ function! SetHighlights()
 
   hi Normal ctermfg=white ctermbg=none
 
-  hi StatusLine ctermfg=black ctermbg=lightgrey cterm=none
-  hi StatusLineNC ctermfg=lightgrey ctermbg=none cterm=underline
+  hi StatusLine ctermfg=lightgrey ctermbg=236 cterm=none
+  hi StatusLineNC ctermfg=lightgrey ctermbg=234 cterm=none
 
   hi QuickFixLine ctermfg=black ctermbg=107 cterm=none
   hi StatusLineTerm ctermfg=black ctermbg=107 cterm=none
-  hi StatusLineTermNC ctermfg=107 ctermbg=none cterm=underline
+  hi StatusLineTermNC ctermfg=107 ctermbg=none cterm=none
 
   hi DebugPC ctermfg=black ctermbg=107 cterm=none
   hi DebugBreakpoint ctermfg=black ctermbg=107 cterm=none
@@ -196,12 +197,14 @@ function! SetHighlights()
   hi LineNr ctermfg=237
   hi CursorLine ctermbg=236 cterm=none
   " 239 is also nice for ctermfg with 236 ctermbg
-  hi CursorLineNr ctermfg=lightgrey ctermbg=none cterm=none
+  hi CursorLineNr ctermfg=lightgrey ctermbg=236 cterm=none
+
+  hi ColorColumn ctermbg=236 cterm=none
 
   "" Searching
-  hi Search ctermfg=black ctermbg=white cterm=none
-  hi IncSearch ctermfg=black ctermbg=white cterm=bold
-  hi CurSearch ctermfg=black ctermbg=white cterm=bold
+  hi Search ctermfg=236 ctermbg=109 cterm=none
+  hi IncSearch ctermfg=black ctermbg=109 cterm=bold
+  hi CurSearch ctermfg=black ctermbg=109 cterm=bold
 
   "" Diffing
   hi SignColumn ctermbg=none
