@@ -195,9 +195,9 @@ function! SetHighlights()
 
   "" Scrolling and line numbers
   hi LineNr ctermfg=237
-  hi CursorLine ctermbg=236 cterm=none
+  hi CursorLine ctermbg=17 cterm=none
   " 239 is also nice for ctermfg with 236 ctermbg
-  hi CursorLineNr ctermfg=lightgrey ctermbg=236 cterm=none
+  hi CursorLineNr ctermfg=lightgrey ctermbg=17 cterm=none
 
   hi ColorColumn ctermbg=236 cterm=none
 
