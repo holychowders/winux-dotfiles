@@ -1,7 +1,7 @@
 " Requirements:
 "  vim-plug
 "  fzf.vim
-"  ripgrep
+"  ~~ripgrep~~ never works. using vimgrep now.
 "  ctags
 
 " TODO:
@@ -283,17 +283,18 @@ let mapleader=" "
 nnoremap <leader><leader> :source $MYVIMRC<CR>
 
 "" fzf.vim remaps
+nnoremap <leader>g :vimgrep<Space>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<Space>
 nnoremap <leader>c :Commands<CR>
-nnoremap <leader>[ :Tags<CR>
+nnoremap <leader>t :Tags<CR>
 nnoremap <leader>' :Marks<CR>
 "nnoremap <leader>l :Lines<CR>
 
 " Other custom remaps
 inoremap jk <Esc><Cmd>w<CR>
 nnoremap <C-q> <Cmd>bd<CR>
+nnoremap <leader>/ :noh<CR>
 
 "" Navigation
 nnoremap <Tab> <Cmd>tabn<CR>
@@ -344,10 +345,16 @@ else " Unix path seperators
 endif
 
 nnoremap <leader>j :make<CR>
-nnoremap <leader>k :copen<CR>
-"nnoremap <C-k> :cclose<CR>
+nnoremap K :copen<CR>
+nnoremap KK :cclose<CR>
 nnoremap <leader>h :cprev<CR>
 nnoremap <leader>l :cnext<CR>
+
+""" General C/C++ file navigation
+"nnoremap [[ {
+"nnoremap ]] }
+nnoremap H ?^\w\+<CR>
+nnoremap L /^\w\+<CR>
 
 "' Termdebug configuration
 let termdebug_wide=0
