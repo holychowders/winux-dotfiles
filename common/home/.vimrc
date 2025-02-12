@@ -44,7 +44,7 @@ set smartindent
 set ignorecase
 set smartcase
 
-set hlsearch
+set nohlsearch
 set incsearch
 
 " Backups
@@ -60,6 +60,7 @@ if !isdirectory(expand($HOME . "/.vimundo"))
 endif
 
 " Wrapping
+set nowrap
 set linebreak  " Break at whole word rather than character when wrapping
 set textwidth=0  " Don't break lines while you're typing
 
