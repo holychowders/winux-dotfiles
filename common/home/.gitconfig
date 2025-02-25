@@ -16,6 +16,9 @@
   #pager = diff-so-fancy | less --tabs=4 -RFX
   pager = delta --diff-so-fancy
 
+[init]
+  defaultBranch = main
+
 [commit]
   verbose = true
 
