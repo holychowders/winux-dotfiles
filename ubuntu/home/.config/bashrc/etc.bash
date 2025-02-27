@@ -23,6 +23,11 @@ alias gld='git log --max-count=5'
 alias grs='git reset --soft HEAD~1'
 alias gri='git rebase -i HEAD~5'
 
+# FUNCTIONS
+cat() {
+    command cat "$@" && (ffplay ~/.config/bashrc/cat-meow.mp3 -nodisp -autoexit -loglevel quiet >/dev/null & disown) || (ffplay ~/.config/bashrc/trill.mp3 -nodisp -autoexit -loglevel quiet >/dev/null & disown)
+}
+
 # PROMPT
 prompt_username="\[\e[1;33m\]\u"
 prompt_at="\[\e[0;90m\]"

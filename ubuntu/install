@@ -8,7 +8,6 @@ set -u  # Fail when a command uses an unbound variable
 
 # Set directory variables
 dotfiles_dir="$HOME/docs/cs/WinuxDotfiles"
-bashrc_dir="$dotfiles_dir/ubuntu/home/.config/bashrc"
 
 # Set directory creation commands
 mkdir_bin="mkdir -p $HOME/docs/bin"
@@ -44,7 +43,7 @@ fi
 echo
 
 # Install packages
-apt_packages="git git-lfs git-delta pandoc ctags gdb cgdb"
+apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb ffmpeg"
 snap_packages="glow gh"
 
 ## Apt packages
@@ -79,24 +78,50 @@ echo
 
 ## TMUX Plugin Manager
 echo Installing TMUX Package Manager
-tmux_plugin_manager_cmd="git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
-echo "$tmux_plugin_manager_cmd"
-if [ $dry_run = false ]; then
-    eval "$tmux_plugin_manager_cmd"
-fi
-echo
+tmux_plugin_manager_dir="$HOME/.tmux/plugins/tpm"
+tmux_plugin_manager_cmd="git clone https://github.com/tmux-plugins/tpm $tmux_plugin_manager_dir"
 
-# Custom bashrc
-bashrc_cmd="echo source $bashrc_dir/* >> $HOME/.bashrc"
-echo Telling $HOME/.bashrc to source custom bash scripts
-echo "$bashrc_cmd"
-if [ $dry_run = false ]; then
-    eval $bashrc_cmd
+proceed_with_tmux_plugin_manager_cmd="false"
+if [ -s $tmux_plugin_manager_dir ]; then
+    echo "WARNING: TMUX Plugin Manager directory $tmux_plugin_manager_dir already exists and is not empty (may already be installed). Would you like to remove it and try to install it? [yes/no]:"
+    read response
+    if [ "$response" = "yes" ]; then
+        tmux_plugin_manager_dir_rm_cmd="rm -rf $tmux_plugin_manager_dir"
+        echo $tmux_plugin_manager_dir_rm_cmd
+        if [ $dry_run = false ]; then
+            eval $tmux_plugin_manager_dir_rm_cmd
+        fi
+        proceed_with_tmux_plugin_manager_cmd="true"
+    fi
+else
+    proceed_with_tmux_plugin_manager_cmd="true"
+fi
+
+if [ $proceed_with_tmux_plugin_manager_cmd = "true" ]; then
+    echo "$tmux_plugin_manager_cmd"
+    if [ $dry_run = false ]; then
+        eval "$tmux_plugin_manager_cmd"
+    fi
 fi
 echo
 
 # Symlinks
 echo Creating symlinks
+
+## Custom bashrc
+bashrc_symlink_cmd="ln -svi $dotfiles_dir/ubuntu/home/.config/bashrc $HOME/.config"
+bashrc_source_cmd="echo source $HOME/.config/bashrc/etc.bash >> $HOME/.bashrc"
+echo "$bashrc_symlink_cmd"
+if [ $dry_run = false ]; then
+    eval $bashrc_symlink_cmd
+fi
+
+echo "Telling $HOME/.bashrc to source custom bash scripts"
+echo "$bashrc_source_cmd"
+if [ $dry_run = false ]; then
+    eval $bashrc_source_cmd
+fi
+echo
 
 ## .gitconfig
 gitconfig_cmd="ln -svi $dotfiles_dir/common/home/.gitconfig $HOME/.gitconfig"
