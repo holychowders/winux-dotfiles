@@ -29,11 +29,11 @@ cat() {
 }
 
 # PROMPT
-prompt_username="\[\e[1;33m\]\u"
-prompt_at="\[\e[0;90m\]"
-prompt_hostname="\[\e[1;34m\]\h"
-prompt_colon="\[\e[0;90m\]"
-prompt_cwd="\[\e[1;31m\]\W"
-prompt_git="\[\e[1;33m\]\$(__git_ps1)"
-prompt_prompt="\[\e[0m\]$ "
+prompt_username="\[\e[0;33m\]\u"
+prompt_at="\[\e[0;34m\]@"
+prompt_hostname="\[\e[0;34m\]\h"
+prompt_colon="\[\e[0;38m\] "
+prompt_cwd="\[\e[0;31m\]\w"
+prompt_git="\[\e[0;34m\]\$(__git_ps1)"
+prompt_prompt=" \[\e[0m\]\n$ "
 PS1="$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
