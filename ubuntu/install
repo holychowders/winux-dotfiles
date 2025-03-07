@@ -31,27 +31,27 @@ echo
 
 # Create required directories
 echo Creating required directories
-echo $mkdir_bin
+echo "$mkdir_bin"
 if [ $dry_run = false ]; then
-    eval $mkdir_bin
+    eval "$mkdir_bin"
 fi
 
-echo $mkdir_config
+echo "$mkdir_config"
 if [ $dry_run = false ]; then
-    eval $mkdir_config
+    eval "$mkdir_config"
 fi
 echo
 
 # Install packages
-apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb ffmpeg"
+apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb ffmpeg shellcheck"
 snap_packages="glow gh"
 
 ## Apt packages
 echo Upgrading apt packages
 apt_upgrade_cmd="sudo apt update && sudo apt upgrade -y"
-echo $apt_upgrade_cmd
+echo "$apt_upgrade_cmd"
 if [ $dry_run = false ]; then
-    eval $apt_upgrade_cmd
+    eval "$apt_upgrade_cmd"
 fi
 echo
 
@@ -60,7 +60,7 @@ for pkg in $apt_packages; do
     cmd="sudo apt install -y $pkg"
     echo "$cmd"
     if [ $dry_run = false ]; then
-        eval $cmd
+        eval "$cmd"
     fi
 done
 echo
@@ -71,7 +71,7 @@ for pkg in $snap_packages; do
     cmd="sudo snap install $pkg"
     echo "$cmd"
     if [ $dry_run = false ]; then
-        eval $cmd
+        eval "$cmd"
     fi
 done
 echo
@@ -82,14 +82,14 @@ tmux_plugin_manager_dir="$HOME/.tmux/plugins/tpm"
 tmux_plugin_manager_cmd="git clone https://github.com/tmux-plugins/tpm $tmux_plugin_manager_dir"
 
 proceed_with_tmux_plugin_manager_cmd="false"
-if [ -s $tmux_plugin_manager_dir ]; then
+if [ -s "$tmux_plugin_manager_dir" ]; then
     echo "WARNING: TMUX Plugin Manager directory $tmux_plugin_manager_dir already exists and is not empty (may already be installed). Would you like to remove it and try to install it? [yes/no]:"
-    read response
+    read -r response
     if [ "$response" = "yes" ]; then
         tmux_plugin_manager_dir_rm_cmd="rm -rf $tmux_plugin_manager_dir"
-        echo $tmux_plugin_manager_dir_rm_cmd
+        echo "$tmux_plugin_manager_dir_rm_cmd"
         if [ $dry_run = false ]; then
-            eval $tmux_plugin_manager_dir_rm_cmd
+            eval "$tmux_plugin_manager_dir_rm_cmd"
         fi
         proceed_with_tmux_plugin_manager_cmd="true"
     fi
@@ -113,13 +113,13 @@ bashrc_symlink_cmd="ln -svi $dotfiles_dir/ubuntu/home/.config/bashrc $HOME/.conf
 bashrc_source_cmd="echo source $HOME/.config/bashrc/etc.bash >> $HOME/.bashrc"
 echo "$bashrc_symlink_cmd"
 if [ $dry_run = false ]; then
-    eval $bashrc_symlink_cmd
+    eval "$bashrc_symlink_cmd"
 fi
 
 echo "Telling $HOME/.bashrc to source custom bash scripts"
 echo "$bashrc_source_cmd"
 if [ $dry_run = false ]; then
-    eval $bashrc_source_cmd
+    eval "$bashrc_source_cmd"
 fi
 echo
 
@@ -127,28 +127,28 @@ echo
 gitconfig_cmd="ln -svi $dotfiles_dir/common/home/.gitconfig $HOME/.gitconfig"
 echo "$gitconfig_cmd"
 if [ $dry_run = false ]; then
-    eval $gitconfig_cmd
+    eval "$gitconfig_cmd"
 fi
 
 ## .gitconfig themes
 gitconfig_themes_cmd="ln -svi $dotfiles_dir/common/home/themes.gitconfig $HOME/themes.gitconfig"
 echo "$gitconfig_themes_cmd"
 if [ $dry_run = false ]; then
-    eval $gitconfig_themes_cmd
+    eval "$gitconfig_themes_cmd"
 fi
 
 ## TMUX
 tmux_cmd="ln -svi $dotfiles_dir/ubuntu/home/.tmux.conf $HOME/.tmux.conf"
 echo "$tmux_cmd"
 if [ $dry_run = false ]; then
-    eval $tmux_cmd
+    eval "$tmux_cmd"
 fi
 
 ## Vim
 vimrc_cmd="ln -svi $dotfiles_dir/common/home/.vimrc $HOME/.vimrc"
 echo "$vimrc_cmd"
 if [ $dry_run = false ]; then
-    eval $vimrc_cmd
+    eval "$vimrc_cmd"
 fi
 echo
 
@@ -156,7 +156,7 @@ echo
 gdb_cmd="ln -svi $dotfiles_dir/ubuntu/home/.gdbinit $HOME/.gdbinit"
 echo "$gdb_cmd"
 if [ $dry_run = false ]; then
-    eval $gdb_cmd
+    eval "$gdb_cmd"
 fi
 echo
 
@@ -164,7 +164,7 @@ echo
 cgdb_cmd="ln -svi $dotfiles_dir/ubuntu/home/.cgdb/cgdbrc $HOME/.cgdb/cgdbrc"
 echo "$cgdb_cmd"
 if [ $dry_run = false ]; then
-    eval $cgdb_cmd
+    eval "$cgdb_cmd"
 fi
 echo
 
