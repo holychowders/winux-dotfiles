@@ -7,14 +7,14 @@ set -o pipefail  # Fail pipe when it finishes if a command within it failed
 set -u  # Fail when a command uses an unbound variable
 
 # Set directory variables
-dotfiles_dir="$HOME/docs/cs/WinuxDotfiles"
+dotfiles_dir="$HOME/docs/cs/winux-dotfiles"
 
 # Set directory creation commands
 mkdir_bin="mkdir -p $HOME/docs/bin"
 mkdir_config="mkdir -p $HOME/.config"
 
 # Startup message
-echo Running install script for WinuxDotfiles/ubuntu
+echo Running install script for winux-dotfiles/ubuntu
 
 # Check for --dry-run
 dry_run=false
