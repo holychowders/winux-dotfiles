@@ -5,13 +5,13 @@ REM TODO: See if we can use winget to install GlazeWM, Git, Visual Studio (and i
 REM FIXME: Fix vim installation. Use nvim for now.
 
 REM Symlink configs
-mklink C:\Users\holychowders\.glzr\glazewm\config.yaml C:\Users\holychowders\docs\cs\WinuxDotfiles\win11\home\.glzr\glazewm\config.yaml
+mklink C:\Users\holychowders\.glzr\glazewm\config.yaml C:\Users\holychowders\docs\cs\winux-dotfiles\win11\home\.glzr\glazewm\config.yaml
 REM FIXME
-REM mklink C:\Users\holychowders\.vimrc C:\Users\holychowders\docs\cs\WinuxDotfiles\common\home\.vimrc
+REM mklink C:\Users\holychowders\.vimrc C:\Users\holychowders\docs\cs\winux-dotfiles\common\home\.vimrc
 mkdir C:\Users\holychowders\AppData\Local\nvim
-mklink C:\Users\holychowders\AppData\Local\nvim\init.vim C:\Users\holychowders\docs\cs\WinuxDotfiles\common\home\.vimrc
-mklink C:\Users\holychowders\.gitconfig C:\Users\holychowders\docs\cs\WinuxDotfiles\common\home\.gitconfig
-mklink C:\Users\holychowders\themes.gitconfig C:\Users\holychowders\docs\cs\WinuxDotfiles\common\home\themes.gitconfig
+mklink C:\Users\holychowders\AppData\Local\nvim\init.vim C:\Users\holychowders\docs\cs\winux-dotfiles\common\home\.vimrc
+mklink C:\Users\holychowders\.gitconfig C:\Users\holychowders\docs\cs\winux-dotfiles\common\home\.gitconfig
+mklink C:\Users\holychowders\themes.gitconfig C:\Users\holychowders\docs\cs\winux-dotfiles\common\home\themes.gitconfig
 
 REM Install some things
 REM All applications desired:
@@ -37,9 +37,8 @@ REM CheatEngine
 REM x64Dbg
 REM Notepad++
 
-REM winget install vim.vim
+winget install vim.vim
 winget install nvim
 winget install dandavison.delta
 winget install ctags
-
 wsl --install
