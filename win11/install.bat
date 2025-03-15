@@ -15,8 +15,16 @@ mklink C:\Users\holychowders\themes.gitconfig C:\Users\holychowders\docs\cs\Winu
 
 REM Install some things
 REM All applications desired:
+REM Git for Windows (will get linux tools and make available on windows)
+REM WSL
+REM ctags
+REM git delta
+REM bed ("binary editor written in go")
+REM WinDbg
+REM Rust (rustup)
 REM Steam
 REM Discord
+REM PowerToys
 REM Firefox (TODO: new browser)
 REM RemedyBG
 REM ProcMon
