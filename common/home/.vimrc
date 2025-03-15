@@ -395,3 +395,9 @@ function! OnTermdebugStopPost()
   nunmap <F3>
   tunmap <F4>
 endfunction
+
+"hi clear
+"syntax clear
+"autocmd FileType * hi clear
+"autocmd FileType * syntax clear
+"autocmd FileType * call SetHighlights()
