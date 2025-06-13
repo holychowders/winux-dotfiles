@@ -61,6 +61,7 @@ endif
 
 " Wrapping
 set nowrap
+autocmd FileType markdown,text set wrap
 set linebreak  " Break at whole word rather than character when wrapping
 set textwidth=0  " Don't break lines while you're typing
 
