@@ -44,7 +44,7 @@ set smartindent
 set ignorecase
 set smartcase
 
-set nohlsearch
+set hlsearch
 set incsearch
 
 " Backups
@@ -77,7 +77,7 @@ set belloff=all  " Please, STFU
 
 "" Scrolling and line numbers
 set number
-set norelativenumber
+set relativenumber
 
 set scrolloff=2
 set sidescrolloff=1
@@ -122,7 +122,7 @@ set statusline+=\ \|\ %y
 " Misc
 set splitbelow
 set backspace=indent,eol,start
-match Visual '\s\+$'  " Highlight trailing whitespace
+match StatusLine '\s\+$'  " Highlight trailing whitespace
 set shortmess=aoOtTI " Avoid most of the 'Hit Enter ...' messages
 set hidden
 set nofixendofline
