@@ -4,7 +4,14 @@
 "  ~~ripgrep~~ never works. using vimgrep now.
 "  ctags
 
+" FIXME
+"   autoread doesn't work
+
 " TODO:
+"   Markdown preview toggle
+"   Tmux sessionizer integration
+"   Yank stack
+"   Undo history list
 "   Save marks across sessions
 "   List and preview/select marks
 "   Display marks in gutter
