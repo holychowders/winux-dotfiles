@@ -5,10 +5,13 @@ set -o vi
 export EDITOR=vim
 
 # ALIASES
+alias winux='cd ~/docs/cs/winux-dotfiles'
+
 alias l='ls -a'
 alias ll='ls -al'
 
-alias g='git status'
+alias g='git status --short'
+alias gg='git status'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias ga='git add'
