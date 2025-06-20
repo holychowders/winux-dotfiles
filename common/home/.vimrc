@@ -136,6 +136,7 @@ set nofixendofline
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 set clipboard=unnamedplus
 set colorcolumn=120
+autocmd FileType gitcommit set spell
 
 " File stuff
 set autoread
