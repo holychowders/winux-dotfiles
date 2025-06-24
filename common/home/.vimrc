@@ -203,6 +203,25 @@ function! SetHighlights()
   hi DebugBreakpoint ctermfg=black ctermbg=107 cterm=none
   hi DebugBreakpointDisabled ctermfg=black ctermbg=red cterm=none
 
+  "" Markdown (TODO: Consider making into autocmd function for markdown filetype)
+  " 208 is also good for headings
+  hi markdownHeadingDelimiter ctermfg=darkred cterm=none
+  hi markdownH1 ctermfg=darkred cterm=bold
+  hi markdownH2 ctermfg=darkred cterm=bold
+  hi markdownH3 ctermfg=darkred cterm=none
+  hi markdownH4 ctermfg=darkred cterm=none
+  hi markdownH5 ctermfg=darkred cterm=none
+  hi markdownH6 ctermfg=darkred cterm=none
+
+  hi markdownCodeDelimiter ctermfg=darkblue cterm=none
+  hi markdownCode ctermfg=darkblue cterm=none
+
+  hi markdownListMarker ctermfg=white cterm=none
+
+  hi markdownUrl ctermfg=white cterm=italic,underline
+  hi markdownUrlDelimiter ctermfg=white cterm=italic
+  hi markdownLinkText ctermfg=white cterm=none
+
   "" Scrolling and line numbers
   hi LineNr ctermfg=237
   hi CursorLine ctermbg=17 cterm=none
