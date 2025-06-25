@@ -222,6 +222,9 @@ function! SetHighlights()
   hi markdownUrlDelimiter ctermfg=white cterm=italic
   hi markdownLinkText ctermfg=white cterm=none
 
+  hi markdownBold ctermfg=red cterm=none
+  hi markdownitalic ctermfg=208 cterm=italic
+
   "" Scrolling and line numbers
   hi LineNr ctermfg=237
   hi CursorLine ctermbg=17 cterm=none
@@ -231,7 +234,8 @@ function! SetHighlights()
   hi ColorColumn ctermbg=236 cterm=none
 
   "" Searching
-  hi Search ctermfg=236 ctermbg=109 cterm=none
+  "hi Search ctermfg=236 ctermbg=109 cterm=none
+  hi Search ctermfg=black ctermbg=darkblue cterm=none
   hi IncSearch ctermfg=black ctermbg=109 cterm=bold
   hi CurSearch ctermfg=black ctermbg=109 cterm=bold
 
@@ -281,6 +285,9 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+
 call plug#end()
 
 "" Set Up Plugins

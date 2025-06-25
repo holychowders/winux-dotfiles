@@ -55,7 +55,7 @@
   #features = villsau
 
   navigate = true # n and N to move to next/previous commit in git log or file in git diff
-  line-numbers = true
+  line-numbers = false
   side-by-side = false
 
 [color]
@@ -75,7 +75,7 @@
 
   old = brightred
   new = brightgreen
-  whitespace = 109 reverse
+  whitespace = 110 reverse
 
 [color "status"]
   added = brightgreen
