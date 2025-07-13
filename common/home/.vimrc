@@ -83,8 +83,8 @@ set icon
 set belloff=all  " Please, STFU
 
 "" Scrolling and line numbers
-set number
-set relativenumber
+"set number
+"set relativenumber
 
 set scrolloff=2
 set sidescrolloff=1
@@ -129,7 +129,6 @@ set statusline+=\ \|\ %y
 " Misc
 set splitbelow
 set backspace=indent,eol,start
-match StatusLine '\s\+$'  " Highlight trailing whitespace
 set shortmess=aoOtTI " Avoid most of the 'Hit Enter ...' messages
 set hidden
 set nofixendofline
@@ -145,9 +144,85 @@ autocmd FileType * setlocal formatoptions-=ro " Disable continuing comments on l
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return cursor to last position on open
 
 " Highlighting
-" TODO: Replace color names with color codes for consistency and clarity
-set notermguicolors " TODO: Configure GUI colors
-syntax on
+" CONECPT: Vim color specifies order/placement of color in terms of keyword, and terminal specifies
+" the final rendering of the color. At least, that's when using Gruvbox in vim and terminal.
+function! SetHighlights()
+  set notermguicolors
+  set t_Co=16  " Use colors from terminal only, clearing or forcing 256-colors colors to 16-colors colors
+
+  syntax on
+  hi clear
+
+  set background=dark
+  color retrobox  " Use retrobox as base
+
+  hi Normal ctermfg=lightgrey ctermbg=none
+  hi WhitespaceTrail ctermbg=grey
+  match WhitespaceTrail '\s\+$'  " Highlight trailing whitespace
+
+  hi StatusLine ctermfg=grey ctermbg=none cterm=none
+  hi StatusLineNC ctermfg=grey ctermbg=none cterm=none
+
+  hi QuickFixLine ctermfg=black ctermbg=darkgreen cterm=none
+  hi StatusLineTerm ctermfg=black ctermbg=darkgreen cterm=none
+  hi StatusLineTermNC ctermfg=darkgreen ctermbg=none cterm=none
+  hi DebugPC ctermfg=black ctermbg=darkgreen cterm=none
+  hi DebugBreakpoint ctermfg=black ctermbg=darkgreen cterm=none
+  hi DebugBreakpointDisabled ctermfg=black ctermbg=red cterm=none
+
+  "" Markdown (TODO: Consider making into autocmd function for markdown filetype)
+  hi markdownHeadingDelimiter ctermfg=red cterm=none
+  hi markdownH1 ctermfg=red cterm=bold
+  hi markdownH2 ctermfg=red cterm=bold
+  hi markdownH3 ctermfg=red cterm=none
+  hi markdownH4 ctermfg=red cterm=none
+  hi markdownH5 ctermfg=red cterm=none
+  hi markdownH6 ctermfg=red cterm=none
+
+  hi markdownCodeDelimiter ctermfg=darkblue cterm=none
+  hi markdownCode ctermfg=darkblue cterm=none
+
+  hi markdownListMarker ctermfg=white cterm=none
+
+  hi markdownUrl ctermfg=white cterm=italic,underline
+  hi markdownUrlDelimiter ctermfg=white cterm=italic
+  hi markdownLinkText ctermfg=white cterm=none
+
+  hi markdownBold ctermfg=darkred cterm=bold
+  hi markdownBoldItalic ctermfg=darkred cterm=bold,italic
+  hi markdownItalic ctermfg=darkyellow cterm=italic
+
+  "" Scrolling and line numbers
+  hi LineNr ctermfg=237
+  hi CursorLine ctermbg=17 cterm=none
+  hi CursorLineNr ctermfg=lightgrey ctermbg=17 cterm=none
+
+  "hi ColorColumn ctermbg=236 cterm=none
+  hi ColorColumn ctermbg=darkgray cterm=none
+
+  "" Searching
+  hi Search ctermfg=black ctermbg=darkyellow cterm=none
+  hi IncSearch ctermfg=black ctermbg=darkyellow cterm=bold
+  hi CurSearch ctermfg=black ctermbg=darkyellow cterm=bold
+
+  "" Diffing
+  hi SignColumn ctermbg=none
+
+  """ Vim diffing
+  hi DiffAdd ctermfg=green
+  hi DiffDelete ctermfg=red
+  hi DiffChange ctermfg=blue
+
+  """ Commit messages
+  hi DiffAdded ctermfg=green
+  hi DiffRemoved ctermfg=red
+  hi DiffChanged ctermfg=blue
+
+  """ GitGutter
+  hi GitGutterAdd ctermfg=green ctermbg=none cterm=none
+  hi GitGutterDelete ctermfg=red ctermbg=none cterm=none
+  hi GitGutterChange ctermfg=blue ctermbg=none cterm=none
+endfunction
 
 "autocmd FileType cpp call OnCppFiletype()
 function! OnCppFiletype()
@@ -185,79 +260,6 @@ function! OnCppFiletype()
   hi link Typedef PreProc
 endfunction
 
-
-function! SetHighlights()
-  set background=dark
-  color retrobox
-
-  hi Normal ctermfg=white ctermbg=none
-
-  hi StatusLine ctermfg=lightgrey ctermbg=236 cterm=none
-  hi StatusLineNC ctermfg=lightgrey ctermbg=234 cterm=none
-
-  hi QuickFixLine ctermfg=black ctermbg=107 cterm=none
-  hi StatusLineTerm ctermfg=black ctermbg=107 cterm=none
-  hi StatusLineTermNC ctermfg=107 ctermbg=none cterm=none
-
-  hi DebugPC ctermfg=black ctermbg=107 cterm=none
-  hi DebugBreakpoint ctermfg=black ctermbg=107 cterm=none
-  hi DebugBreakpointDisabled ctermfg=black ctermbg=red cterm=none
-
-  "" Markdown (TODO: Consider making into autocmd function for markdown filetype)
-  " 208 is also good for headings
-  hi markdownHeadingDelimiter ctermfg=darkred cterm=none
-  hi markdownH1 ctermfg=darkred cterm=bold
-  hi markdownH2 ctermfg=darkred cterm=bold
-  hi markdownH3 ctermfg=darkred cterm=none
-  hi markdownH4 ctermfg=darkred cterm=none
-  hi markdownH5 ctermfg=darkred cterm=none
-  hi markdownH6 ctermfg=darkred cterm=none
-
-  hi markdownCodeDelimiter ctermfg=darkblue cterm=none
-  hi markdownCode ctermfg=darkblue cterm=none
-
-  hi markdownListMarker ctermfg=white cterm=none
-
-  hi markdownUrl ctermfg=white cterm=italic,underline
-  hi markdownUrlDelimiter ctermfg=white cterm=italic
-  hi markdownLinkText ctermfg=white cterm=none
-
-  hi markdownBold ctermfg=red cterm=none
-  hi markdownitalic ctermfg=208 cterm=italic
-
-  "" Scrolling and line numbers
-  hi LineNr ctermfg=237
-  hi CursorLine ctermbg=17 cterm=none
-  " 239 is also nice for ctermfg with 236 ctermbg
-  hi CursorLineNr ctermfg=lightgrey ctermbg=17 cterm=none
-
-  hi ColorColumn ctermbg=236 cterm=none
-
-  "" Searching
-  "hi Search ctermfg=236 ctermbg=109 cterm=none
-  hi Search ctermfg=black ctermbg=darkblue cterm=none
-  hi IncSearch ctermfg=black ctermbg=109 cterm=bold
-  hi CurSearch ctermfg=black ctermbg=109 cterm=bold
-
-  "" Diffing
-  hi SignColumn ctermbg=none
-
-  """ Vim diffing
-  hi DiffAdd ctermfg=green
-  hi DiffDelete ctermfg=red
-  hi DiffChange ctermfg=blue
-
-  """ Commit messages
-  hi DiffAdded ctermfg=green
-  hi DiffRemoved ctermfg=red
-  hi DiffChanged ctermfg=blue
-
-  """ GitGutter
-  hi GitGutterAdd ctermfg=green ctermbg=none cterm=none
-  hi GitGutterDelete ctermfg=red ctermbg=none cterm=none
-  hi GitGutterChange ctermfg=blue ctermbg=none cterm=none
-endfunction
-
 call SetHighlights()
 
 " Plugins
@@ -282,7 +284,7 @@ endif
 call plug#begin(expand('~/.vim/plugged'))
 "Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-surround'
@@ -291,14 +293,32 @@ Plug 'tpope/vim-surround'
 call plug#end()
 
 "" Set Up Plugins
-"let g:ale_linters = {
-"\   'cpp': ['gcc', 'clangtidy']
-"\}
+
+let g:lsp_diagnostics_enabled = 1
+
+""" Ale
+"nnoremap <leader>[ :ALEFix<CR>
+
+"let g:ale_set_signs = 1
+"let g:ale_sign_info = ''
+"let g:ale_sign_error = ''
+"let g:ale_sign_warning = ''
+"let g:ale_sign_hint = ''
+
 "let g:ale_fix_on_save = 1
 "let g:ale_lint_on_text_changed = 'always'
 "let g:ale_lint_on_save = 1
-"
-"nnoremap <leader>[ :ALEFix<CR>
+
+"let g:ale_linters = {
+"\   'cpp': ['gcc', 'clangtidy']
+"\}
+"let g:ale_linter_aliases = {'bash': 'sh'}
+"let g:ale_fixers = {
+"\    'sh: ['shfmt'],
+"\    'bash: ['shfmt'],
+"\}
+
+""" Git Gutter
 
 "let g:gitgutter_sign_added = '+'
 "let g:gitgutter_sign_modified = '~'

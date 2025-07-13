@@ -43,7 +43,7 @@ fi
 echo
 
 # Install packages
-apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb ffmpeg shellcheck w3m ranger lynx"
+apt_packages="git git-lfs git-delta pandoc exuberant-ctags gdb cgdb ffmpeg shellcheck shfmt w3m ranger lynx"
 snap_packages="glow gh"
 
 ## Apt packages
