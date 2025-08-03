@@ -19,20 +19,32 @@ export cflags="$cdebug $cwarnings $cfeatures $csanitize"
 # ALIASES
 ## Misc aliases
 alias r='vi README.md'
+alias c='clear'
+
+## Navigation aliases
+alias ..='..'
 
 ## Common directory and file aliases
 alias cs='cd ~/docs/cs'
 alias winux='cd ~/docs/cs/winux-dotfiles'
 alias lab='cd ~/docs/notes/lab'
 alias notes='cd ~/docs/notes'
-alias ref='glow -p ~/docs/notes/lab/linux/book/README.md'
-alias refe='vi ~/docs/notes/lab/linux/book/README.md'
-alias todo='glow -p ~/docs/notes/SCHEDULE.md'
-alias todoe='vi ~/docs/notes/SCHEDULE.md'
+alias todo='glow -p -w 0 ~/docs/notes/LOGISTICS/schedule.md'
+alias todoe='vi ~/docs/notes/LOGISTICS/schedule.md'
+
+## Reference manual aliases
+alias refs='glow -p -w 0 ~/docs/notes/lab/sysadmin/linux/book/'
+
+alias ref='glow -p -w 0 ~/docs/notes/lab/sysadmin/linux/book/README.md'
+alias refe='vi ~/docs/notes/lab/sysadmin/linux/book/README.md'
+
+alias pbb='glow -p -w 0 ~/docs/notes/lab/sysadmin/linux/book/other-resources/pure-bash-bible/README.md'
+alias psb='glow -p -w 0 ~/docs/notes/lab/sysadmin/linux/book/other-resources/pure-sh-bible/README.md'
 
 ## General system utility aliases
 alias q='exit'
 alias chmox='chmod +x'
+alias ls='ls --color --group-directories-first'
 alias l='ls -a'
 alias ll='ls -al'
 
@@ -69,11 +81,22 @@ i() {
 }
 
 # PROMPT
-prompt_username="\[\e[0;33m\]\u"
-prompt_at="\[\e[0;34m\]@"
-prompt_hostname="\[\e[0;34m\]\h"
-prompt_colon="\[\e[0;38m\] "
-prompt_cwd="\[\e[0;31m\]\w"
-prompt_git="\[\e[0;34m\]\$(__git_ps1)"
+#prompt_username="\[\e[0;33m\]\u"
+#prompt_at="\[\e[0;34m\]@"
+#prompt_hostname="\[\e[0;34m\]\h"
+#prompt_colon="\[\e[0;38m\] "
+#prompt_cwd="\[\e[0;31m\]\w"
+#prompt_git="\[\e[0;34m\]\$(__git_ps1)"
+#prompt_prompt=" \[\e[0m\]\n$ "
+#PS1="$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
+
+# ALTERNATE PROMPT
+prompt_username="\[\e[1;32m\]\u"
+prompt_at="\[\e[1;32m\]@"
+prompt_hostname="\[\e[1;32m\]\h"
+prompt_colon="\[\e[0;38m\]:"
+prompt_cwd="\[\e[1;36m\]\w"
+prompt_git="\[\e[0;37m\]\$(__git_ps1)"
 prompt_prompt=" \[\e[0m\]\n$ "
-PS1="$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
+prompt_datetime="\[\e[0;32m\][`date +"%m/%d/%y %T %Z"`] "
+PS1="$prompt_datetime$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"

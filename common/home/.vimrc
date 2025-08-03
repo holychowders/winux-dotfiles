@@ -134,7 +134,10 @@ set hidden
 set nofixendofline
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 set clipboard=unnamedplus
+
 set colorcolumn=120
+autocmd FileType markdown set colorcolumn=0  " TODO: Just don't enable for Markdown
+
 autocmd FileType gitcommit set spell
 
 " File stuff
@@ -172,8 +175,8 @@ function! SetHighlights()
 
   "" Markdown (TODO: Consider making into autocmd function for markdown filetype)
   hi markdownHeadingDelimiter ctermfg=red cterm=none
-  hi markdownH1 ctermfg=red cterm=bold
-  hi markdownH2 ctermfg=red cterm=bold
+  hi markdownH1 ctermfg=red cterm=bold,underline
+  hi markdownH2 ctermfg=red cterm=bold,underline
   hi markdownH3 ctermfg=red cterm=none
   hi markdownH4 ctermfg=red cterm=none
   hi markdownH5 ctermfg=red cterm=none
@@ -195,6 +198,7 @@ function! SetHighlights()
   "" Scrolling and line numbers
   hi LineNr ctermfg=237
   hi CursorLine ctermbg=17 cterm=none
+  "hi CursorLine ctermbg=black cterm=none
   hi CursorLineNr ctermfg=lightgrey ctermbg=17 cterm=none
 
   "hi ColorColumn ctermbg=236 cterm=none
