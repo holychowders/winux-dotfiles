@@ -33,16 +33,14 @@ alias todo='glow -p -w 0 ~/docs/notes/logistics/schedule.md'
 alias todoe='vi ~/docs/notes/logistics/schedule.md'
 
 ## Reference manual aliases
-alias refs='glow -p -w 0 ~/docs/notes/lab/linux/book/'
-
-alias ref='glow -p -w 0 ~/docs/notes/lab/linux/book/README.md'
-alias refe='vi ~/docs/notes/lab/linux/book/README.md'
+alias refs='glow -p -w 0 ~/docs/cs/linux-reference'
+alias ref='glow -p -w 0 ~/docs/cs/linux-reference/README.md'
+alias refe='vi ~/docs/cs/linux-reference/README.md'
+alias pbb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-bash-bible/README.md'
+alias psb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-sh-bible/README.md'
 
 alias res='glow -p -w 0 ~/docs/notes/lab/resources/README.md'
 alias rese='vi ~/docs/notes/lab/resources/README.md'
-
-alias pbb='glow -p -w 0 ~/docs/notes/lab/linux/book/other-resources/pure-bash-bible/README.md'
-alias psb='glow -p -w 0 ~/docs/notes/lab/linux/book/other-resources/pure-sh-bible/README.md'
 
 ## General system utility aliases
 alias q='exit'
