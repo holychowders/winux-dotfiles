@@ -70,6 +70,25 @@ alias gl='git log --oneline'
 #alias gri='git rebase -i HEAD~5'
 
 # FUNCTIONS
+mkreadme() {
+    if [ -f "README.md" ]; then
+        echo "ERROR: README.md exists. Delete it and try again. Aborting." >&2
+        return 1
+    fi
+
+    [ "$1" = "--repo-name" ] && local repomd="- *GitHub repo: <https://github.com/holychowders/$2/>*" && local title="${@:3}" || local title="$@"
+
+    cat<<EOF > README.md
+# $title
+
+---
+
+- *Created by \`holychowders\` on `date +%F`*
+- *GitHub profile: <https://github.com/holychowders/>*
+$repomd
+EOF
+}
+
 cat() {
     command cat "$@" && (ffplay ~/.config/bashrc/cat-meow.mp3 -nodisp -autoexit -loglevel quiet >/dev/null & disown) || (ffplay ~/.config/bashrc/trill.mp3 -nodisp -autoexit -loglevel quiet >/dev/null & disown)
 }
