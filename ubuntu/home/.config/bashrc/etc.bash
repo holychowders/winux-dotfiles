@@ -39,8 +39,8 @@ alias refe='vi ~/docs/cs/linux-reference/README.md'
 alias pbb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-bash-bible/README.md'
 alias psb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-sh-bible/README.md'
 
-alias res='glow -p -w 0 ~/docs/notes/lab/resources/README.md'
-alias rese='vi ~/docs/notes/lab/resources/README.md'
+alias res='glow -p -w 0 ~/docs/notes/lab/resources.md'
+alias rese='vi ~/docs/notes/lab/resources.md'
 
 ## General system utility aliases
 alias q='exit'
@@ -76,7 +76,7 @@ mkreadme() {
         return 1
     fi
 
-    [ "$1" = "--repo-name" ] && local repomd="- *GitHub repo: <https://github.com/holychowders/$2/>*" && local title="${@:3}" || local title="$@"
+    [ "$1" = "--repo-name" ] && local repomd="- *GitHub repo: <https://github.com/holychowders/$2>*" && local title="${@:3}" || local title="$@"
 
     cat<<EOF > README.md
 # $title
@@ -84,7 +84,7 @@ mkreadme() {
 ---
 
 - *Created by \`holychowders\` on `date +%F`*
-- *GitHub profile: <https://github.com/holychowders/>*
+- *GitHub profile: <https://github.com/holychowders>*
 $repomd
 EOF
 }
@@ -111,12 +111,15 @@ i() {
 #PS1="$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
 
 # ALTERNATE PROMPT
-prompt_username="\[\e[1;32m\]\u"
-prompt_at="\[\e[1;32m\]@"
-prompt_hostname="\[\e[1;32m\]\h"
-prompt_colon="\[\e[0;38m\]:"
-prompt_cwd="\[\e[1;36m\]\w"
-prompt_git="\[\e[0;37m\]\$(__git_ps1)"
-prompt_prompt=" \[\e[0m\]\n$ "
-prompt_datetime="\[\e[0;32m\][`date +"%m/%d/%y %T %Z"`] "
-PS1="$prompt_datetime$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
+set_ps1() {
+  prompt_username="\[\e[1;32m\]\u"
+  prompt_at="\[\e[1;32m\]@"
+  prompt_hostname="\[\e[1;32m\]\h"
+  prompt_colon="\[\e[0;38m\]:"
+  prompt_cwd="\[\e[1;36m\]\w"
+  prompt_git="\[\e[0;37m\]\$(__git_ps1)"
+  prompt_prompt=" \[\e[0m\]\n$ "
+  prompt_datetime="\[\e[0;32m\][`date +"%m/%d/%y %T %Z"`] "
+  PS1="$prompt_datetime$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
+}
+PROMPT_COMMAND=set_ps1
