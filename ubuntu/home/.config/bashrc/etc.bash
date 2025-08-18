@@ -78,26 +78,32 @@ mkreadme() {
 
     [ "$1" = "--repo-name" ] && local repomd="- *GitHub repo: <https://github.com/holychowders/$2>*" && local title="${@:3}" || local title="$@"
 
-    cat<<EOF > README.md
+    cat <<EOF >README.md
 # $title
 
 ---
 
-- *Created by \`holychowders\` on `date +%F`*
+- *Created by \`holychowders\` on $(date +%F)*
 - *GitHub profile: <https://github.com/holychowders>*
 $repomd
 EOF
 }
 
 cat() {
-    command cat "$@" && (ffplay ~/.config/bashrc/cat-meow.mp3 -nodisp -autoexit -loglevel quiet >/dev/null & disown) || (ffplay ~/.config/bashrc/trill.mp3 -nodisp -autoexit -loglevel quiet >/dev/null & disown)
+    command cat "$@" && (
+        ffplay ~/.config/bashrc/cat-meow.mp3 -nodisp -autoexit -loglevel quiet >/dev/null &
+        disown
+    ) || (
+        ffplay ~/.config/bashrc/trill.mp3 -nodisp -autoexit -loglevel quiet >/dev/null &
+        disown
+    )
 }
 
 #alias '?=xargs -r w3m https://www.duckduckgo.com/?q='
 
 i() {
-  query=$(echo "$*" | sed 's/ /+/g')
-  w3m "https://duckduckgo.com/?q=$query"
+    query=$(echo "$*" | sed 's/ /+/g')
+    w3m "https://duckduckgo.com/?q=$query"
 }
 
 # PROMPT
@@ -112,14 +118,14 @@ i() {
 
 # ALTERNATE PROMPT
 set_ps1() {
-  prompt_username="\[\e[1;32m\]\u"
-  prompt_at="\[\e[1;32m\]@"
-  prompt_hostname="\[\e[1;32m\]\h"
-  prompt_colon="\[\e[0;38m\]:"
-  prompt_cwd="\[\e[1;36m\]\w"
-  prompt_git="\[\e[0;37m\]\$(__git_ps1)"
-  prompt_prompt=" \[\e[0m\]\n$ "
-  prompt_datetime="\[\e[0;32m\][`date +"%m/%d/%y %T %Z"`] "
-  PS1="$prompt_datetime$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
+    prompt_username="\[\e[1;32m\]\u"
+    prompt_at="\[\e[1;32m\]@"
+    prompt_hostname="\[\e[1;32m\]\h"
+    prompt_colon="\[\e[0;38m\]:"
+    prompt_cwd="\[\e[1;36m\]\w"
+    prompt_git="\[\e[0;37m\]\$(__git_ps1)"
+    prompt_prompt=" \[\e[0m\]\n$ "
+    prompt_datetime="\[\e[0;32m\][$(date +"%m/%d/%y %T %Z")] "
+    PS1="$prompt_datetime$prompt_username$prompt_at$prompt_hostname$prompt_colon$prompt_cwd$prompt_git$prompt_prompt"
 }
 PROMPT_COMMAND=set_ps1
