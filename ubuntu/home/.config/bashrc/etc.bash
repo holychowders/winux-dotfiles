@@ -39,6 +39,10 @@ alias refe='vi ~/docs/cs/linux-reference/README.md'
 alias pbb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-bash-bible/README.md'
 alias psb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-sh-bible/README.md'
 
+alias refws='glow -p -w 0 ~/docs/cs/windows-reference'
+alias refw='glow -p -w 0 ~/docs/cs/windows-reference/README.md'
+alias refwe='vi ~/docs/cs/windows-reference/README.md'
+
 alias res='glow -p -w 0 ~/docs/notes/lab/resources.md'
 alias rese='vi ~/docs/notes/lab/resources.md'
 
