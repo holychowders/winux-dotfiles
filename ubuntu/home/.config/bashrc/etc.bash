@@ -48,7 +48,7 @@ alias rese='vi ~/docs/notes/lab/resources.md'
 
 ## General system utility aliases
 alias q='exit'
-alias chmox='chmod +x'
+alias chmox='chmod u+x'
 alias ls='ls --color --group-directories-first'
 alias l='ls -a'
 alias ll='ls -al'
