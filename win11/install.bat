@@ -61,6 +61,9 @@ wsl --install -d Ubuntu
 winget install Docker.DockerDesktop
 winget install Kubernetes.kind
 
+rem File Pilot
+curl -L "https://filepilot.tech/download/latest" -o "%USERPROFILE%\docs\bin\FPilot.exe"
+
 rem bed (Binary editor written in Go)
 curl -L "https://github.com/itchyny/bed/releases/download/v0.2.8/bed_v0.2.8_windows_amd64.zip" -o "bed_v0.2.8_windows_amd64.zip"
 tar -xf "bed_v0.2.8_windows_amd64.zip"
