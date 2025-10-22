@@ -74,6 +74,17 @@ alias gl='git log --oneline'
 #alias gri='git rebase -i HEAD~5'
 
 # FUNCTIONS
+clone() {  # Clone a holychowders repo into the current directory and cd into it
+    if [ -z "$1" ]; then
+        echo 'Specify repository from user github.com/holychowders'
+        echo 'Example: `clone dotfiles` to clone `github.com/holychowders/dotfiles` and `cd` into it'
+        return 1
+    fi
+    repo_name="$1"
+    git clone git@github.com:holychowders/$repo_name
+    cd $repo_name
+}
+
 mkreadme() {
     if [ -f "README.md" ]; then
         echo "ERROR: README.md exists. Delete it and try again. Aborting." >&2
