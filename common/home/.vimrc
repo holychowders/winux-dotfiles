@@ -420,7 +420,7 @@ nnoremap L /^\w\+<CR>
 let termdebug_wide=0
 let termdebugger='gdb'
 
-nnoremap <F1> :make<CR>:Termdebug .build/out<CR>
+nnoremap <F1> :make<CR>:Termdebug build/out<CR>
 autocmd User TermdebugStartPost call OnTermdebugStartPost()
 
 function! OnTermdebugStartPost()
