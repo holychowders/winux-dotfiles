@@ -12,6 +12,8 @@ dotfiles_dir="$HOME/docs/cs/winux-dotfiles"
 # Set directory creation commands
 mkdir_bin="mkdir -p $HOME/docs/bin"
 mkdir_config="mkdir -p $HOME/.config"
+mkdir_cgdb="mkdir -p $HOME/.cgdb/"
+mkdir_downloads="mkdir -p $HOME/docs/downloads/"
 
 # Startup message
 echo Running install script for winux-dotfiles/ubuntu
@@ -42,9 +44,22 @@ if [ $dry_run = false ]; then
 fi
 echo
 
+echo "$mkdir_cgdb"
+if [ $dry_run = false ]; then
+    eval "$mkdir_cgdb"
+fi
+
+echo "$mkdir_downloads"
+if [ $dry_run = false ]; then
+    eval "$mkdir_downloads"
+fi
+
+echo
+
 # Install packages
-apt_packages="git git-delta git-lfs gitleaks git-filter-repo pandoc exuberant-ctags clang gcc gdb cgdb ffmpeg shellcheck shfmt w3m ranger lynx"
-snap_packages="glow gh"
+apt_packages="vim-nox git git-delta git-lfs gitleaks git-filter-repo pandoc exuberant-ctags clang gcc cmake make gdb cgdb ffmpeg shellcheck shfmt w3m ranger lynx"
+snap_packages="glow gh rustup go"
+snap_packages_classic="glow gh"
 
 ## Apt packages
 echo Upgrading apt packages
@@ -76,8 +91,19 @@ for pkg in $snap_packages; do
 done
 echo
 
+## Snap packages (--classic)
+echo 'Installing snap packages (--classic)'
+for pkg in $snap_packages; do
+    cmd="sudo snap install --classic $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+echo
+
 ## TMUX Plugin Manager
-echo Installing TMUX Package Manager
+echo Installing TMUX Plugin Manager
 tmux_plugin_manager_dir="$HOME/.tmux/plugins/tpm"
 tmux_plugin_manager_cmd="git clone https://github.com/tmux-plugins/tpm $tmux_plugin_manager_dir"
 
@@ -167,6 +193,37 @@ if [ $dry_run = false ]; then
     eval "$cgdb_cmd"
 fi
 echo
+
+## Rustup (Rust)
+rustup_cmd="rustup default stable"
+echo "$rustup_cmd"
+if [ $dry_run = false ]; then
+    eval "$rustup_cmd"
+fi
+echo
+
+# Fonts
+## Detect environment
+if [ -n "$DISPLAY" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    echo "Detected desktop environment: Installing fonts"
+    if [ $dry_run = false ]; then
+## Fonts directory
+        mkdir -p $HOME/.local/share/fonts/
+
+## Begin installing fonts
+        pushd $HOME/docs/downloads/
+
+### Install Red Hat Mono
+        curl -L "https://github.com/RedHatOfficial/RedHatFont/archive/refs/tags/4.1.0.tar.gz" -o "RedHatFont-4.1.0.tar.gz"
+        tar -xf "RedHatFont-4.1.0.tar.gz"
+        cp $PWD/RedHatFont-4.1.0/fonts/Mono/ttf/*.ttf $HOME/.local/share/fonts/
+
+## Finish install fonts
+        echo "Updating font cache"
+        fc-cache -f -v  # Update font cache
+        popd
+    fi
+fi
 
 # Finishing message
 echo Install script finished
