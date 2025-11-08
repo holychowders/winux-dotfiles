@@ -59,7 +59,8 @@ echo
 # Install packages
 apt_packages="vim-nox git git-delta git-lfs gitleaks git-filter-repo pandoc exuberant-ctags clang clang-format clang-tidy gcc cmake make gdb cgdb cloc ffmpeg shellcheck shfmt w3m ranger lynx"
 snap_packages="glow gh rustup go"
-snap_packages_classic="glow gh"
+snap_packages_classic="gh"
+go_packages="github.com/charmbracelet/glow/v2@latest"
 
 ## Apt packages
 echo Upgrading apt packages
@@ -93,8 +94,18 @@ echo
 
 ## Snap packages (--classic)
 echo 'Installing snap packages (--classic)'
-for pkg in $snap_packages; do
+for pkg in $snap_packages_classic; do
     cmd="sudo snap install --classic $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+
+## Go packages
+echo 'Installing Go packages'
+for pkg in $go_packages; do
+    cmd="go install $pkg"
     echo "$cmd"
     if [ $dry_run = false ]; then
         eval "$cmd"

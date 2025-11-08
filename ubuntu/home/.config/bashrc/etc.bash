@@ -1,20 +1,11 @@
 #!/usr/bin/env bash
 
+# PATH
+export PATH="$PATH:$(go env GOPATH)/bin"
+
 # MISC
 set -o vi
 export EDITOR=vim
-
-cdebug='-g -O0'
-cwarnings='-pedantic -Wall -Wextra -Wno-c23-extensions'
-cfeatures='-fvisibility=hidden -fno-exceptions -fno-unwind-tables -fno-rtti -ffast-math'
-csanitize='-fsanitize=address,undefined,alignment,implicit-integer-truncation,implicit-integer-arithmetic-value-change,implicit-conversion,integer,nullability-arg'
-# consider: -Weverything
-export cflags="$cdebug $cwarnings $cfeatures $csanitize"
-#alias c="clang $cflags"
-#alias c99="clang -std=99 $cflags"
-# WARNING: DON'T DO THIS. `cpp` is already a command
-#alias cpp="clang $cflags"
-#alias cpp14="clang -std=c++14 $cflags"
 
 # ALIASES
 ## Misc aliases
@@ -23,28 +14,37 @@ alias c='clear'
 
 ## Navigation aliases
 alias ..='..'
+alias home='cd ~'
 
 ## Common directory and file aliases
 alias cs='cd ~/docs/cs'
+alias lib='cd ~/docs/cs/lib'
 alias winux='cd ~/docs/cs/winux-dotfiles'
-alias lab='cd ~/docs/notes/lab'
+
 alias notes='cd ~/docs/notes'
-alias todo='glow -p -w 0 ~/docs/notes/logistics/schedule.md'
-alias todoe='vi ~/docs/notes/logistics/schedule.md'
+alias lab='cd ~/docs/notes/lab'
+
+alias log='glow -tl ~/docs/notes/log.md'
+alias loge='vi ~/docs/notes/log.md'
+
+alias res='glow -tl ~/docs/notes/resources.md'
+alias rese='vi ~/docs/notes/resources.md'
 
 ## Reference manual aliases
-alias refs='glow -p -w 0 ~/docs/cs/linux-reference'
-alias ref='glow -p -w 0 ~/docs/cs/linux-reference/README.md'
+alias refs='glow -tl ~/docs/cs/linux-reference'
+alias ref='glow -tl ~/docs/cs/linux-reference/README.md'
 alias refe='vi ~/docs/cs/linux-reference/README.md'
-alias pbb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-bash-bible/README.md'
-alias psb='glow -p -w 0 ~/docs/cs/linux-reference/other-resources/pure-sh-bible/README.md'
 
-alias refws='glow -p -w 0 ~/docs/cs/windows-reference'
-alias refw='glow -p -w 0 ~/docs/cs/windows-reference/README.md'
-alias refwe='vi ~/docs/cs/windows-reference/README.md'
+alias pbb='glow -tl ~/docs/cs/linux-reference/other-resources/pure-bash-bible/README.md'
+alias psb='glow -tl ~/docs/cs/linux-reference/other-resources/pure-sh-bible/README.md'
 
-alias res='glow -p -w 0 ~/docs/notes/lab/resources.md'
-alias rese='vi ~/docs/notes/lab/resources.md'
+alias wrefs='glow -tl ~/docs/cs/windows-reference'
+alias wref='glow -tl ~/docs/cs/windows-reference/README.md'
+alias wrefe='vi ~/docs/cs/windows-reference/README.md'
+
+alias crefs='glow -tl ~/docs/notes/cs/c/'
+alias cref='glow -tl ~/docs/notes/cs/c/c-reference.md'
+alias crefe='vi ~/docs/notes/cs/c/c-reference.md'
 
 ## General system utility aliases
 alias q='exit'
@@ -64,7 +64,8 @@ alias gap='git add -p'
 alias gc='git commit'
 alias gcp='git commit -p'
 alias gca='git commit -a'
-alias gcu='git commit -a --allow-empty-message -m ""'
+alias gcu='git commit --allow-empty-message -m ""'
+alias gcua='git commit -a --allow-empty-message -m ""'
 alias gp='git pull && git push'
 alias gl='git log --oneline'
 #alias gll='git log --oneline --max-count=15'
