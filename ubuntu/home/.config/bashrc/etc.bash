@@ -75,6 +75,28 @@ alias gl='git log --oneline'
 #alias gri='git rebase -i HEAD~5'
 
 # FUNCTIONS
+dirty() {
+    pushd ~/docs/
+    find . -type d -name .git | while read dir; do
+        repo=$(dirname "$dir")
+        cd "$repo"
+        dirty=$(git status --porcelain)
+        [[ -n "$dirty" ]] && echo "Dirty repo: $repo"
+        cd - >/dev/null
+    done
+    popd
+}
+fetch() {
+    pushd ~/docs/
+    mr fetch
+    popd
+}
+missing() {
+    pushd ~/docs/
+    mr log --max-count=1 --oneline
+    popd
+}
+
 clone() {  # Clone a holychowders repo into the current directory and cd into it
     if [ -z "$1" ]; then
         echo 'Specify repository from user github.com/holychowders'
