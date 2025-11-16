@@ -340,14 +340,15 @@ let g:gitgutter_sign_removed_above_and_below = '_‾'
 
 " Remaps
 let mapleader=" "
-nnoremap <leader><leader> :source $MYVIMRC<CR>
+"nnoremap <leader><leader> :source $MYVIMRC<CR>
+nnoremap <leader><leader> :! 
 
 "" fzf.vim remaps
 nnoremap <leader>g :vimgrep<Space>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
-nnoremap <leader>t :Tags<CR>
+nnoremap <leader>t :tags<CR>
 nnoremap <leader>' :Marks<CR>
 "nnoremap <leader>l :Lines<CR>
 
