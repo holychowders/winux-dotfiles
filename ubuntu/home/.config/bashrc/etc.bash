@@ -103,9 +103,15 @@ clone() {  # Clone a holychowders repo into the current directory and cd into it
         echo 'Example: `clone dotfiles` to clone `github.com/holychowders/dotfiles` and `cd` into it'
         return 1
     fi
-    repo_name="$1"
-    git clone git@github.com:holychowders/$repo_name
-    cd $repo_name
+    local repo_name="$1"
+    local clone_name="$2"
+    git clone git@github.com:holychowders/"$repo_name" "$clone_name"
+
+    if [ -n "$clone_name" ]; then
+        cd "$clone_name"
+    else
+        cd "$repo_name"
+    fi
 }
 
 mkreadme() {
