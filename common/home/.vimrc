@@ -270,8 +270,13 @@ call SetHighlights()
 packadd termdebug
 
 "" Init Whitebox
-if !empty(glob('~/docs/bin/whitebox/editor_plugins/whitebox-vim/plugin/whitebox.vim'))
-    execute 'source' expand('~/docs/bin/whitebox/editor_plugins/whitebox-vim/plugin/whitebox.vim')
+"if !empty(glob('~/docs/bin/whitebox/editor_plugins/whitebox-vim/plugin/whitebox.vim'))
+"    execute 'source' expand('~/docs/bin/whitebox/editor_plugins/whitebox-vim/plugin/whitebox.vim')
+"endif
+
+let whitebox_path = expand('~/docs/bin/whitebox-win-nightly-2025-10-29/whitebox_nightly-2025-10-29/editor_plugins/whitebox-vim/plugin/whitebox.vim')
+if filereadable(whitebox_path)
+    execute 'source' whitebox_path
 endif
 
 "" Install vim-plug
@@ -294,6 +299,8 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
 Plug 'preservim/tagbar'
+Plug 'preservim/nerdtree'
+"Plug 'preservim/vim-indent-guides'
 
 call plug#end()
 
@@ -341,17 +348,34 @@ let g:gitgutter_sign_removed_above_and_below = '_‾'
 
 " Remaps
 let mapleader=" "
+nnoremap <leader> :!
 "nnoremap <leader><leader> :source $MYVIMRC<CR>
-nnoremap <leader><leader> :! 
+nnoremap <leader><leader> :! git status --short<CR>
+nnoremap <leader>d :GitGutterPreviewHunk<CR>
+nnoremap <leader>dd :GitGutterDiffOrig<CR>
 
-"" fzf.vim remaps
-nnoremap <leader>g :vimgrep<Space>
+"" fzf.vim and searching remaps
+"nnoremap <leader>g :vimgrep<Space>
+
+"nnoremap <leader>b :buffers<CR>:b 
+"nnoremap <leader>' :marks<CR>:mark 
+
+"nnoremap gu        :vimgrep <C-r><C-w> % <CR>``:copen<CR>
+"nnoremap gau       :vimgrepadd <C-r><C-w> % <CR>
+
+nnoremap <leader>t :tags<CR>
+nnoremap gd        :tag <C-r><C-w><CR>
+
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
-nnoremap <leader>t :tags<CR>
 nnoremap <leader>' :Marks<CR>
-"nnoremap <leader>l :Lines<CR>
+nnoremap <leader>l :Lines<CR>
+
+"" Code exploration
+"nnoremap <leader>o :Lexplore<CR>
+nnoremap <leader>p :NERDTreeToggle<CR>
+nnoremap <leader>o :TagbarToggle<CR>
 
 " Other custom remaps
 inoremap jk <Esc><Cmd>w<CR>
@@ -376,10 +400,6 @@ tnoremap <C-j> <C-w>j
 tnoremap <C-k> <C-w>k
 tnoremap <C-h> <C-w>h
 tnoremap <C-l> <C-w>l
-
-"" Explorer
-nnoremap <leader>o :Explore<CR>
-nnoremap <leader>p :bp<CR>
 
 "" Build scripts and quickfix
 if has("win32") || has("win64") " Windows path seperators
@@ -411,9 +431,6 @@ nnoremap K :copen<CR>
 nnoremap KK :cclose<CR>
 nnoremap <leader>h :cprev<CR>
 nnoremap <leader>l :cnext<CR>
-
-"" Outline (tagbar)
-nnoremap <F4> :TagbarToggle<CR>
 
 """ General C/C++ file navigation
 "nnoremap [[ {

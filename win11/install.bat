@@ -59,6 +59,7 @@ winget install Rustlang.Rustup
 wsl --install -d Ubuntu
 winget install Docker.DockerDesktop
 winget install Kubernetes.kind
+winget install junegunn.fzf
 
 rem File Pilot
 curl -L "https://filepilot.tech/download/latest" -o "%USERPROFILE%\docs\bin\FPilot.exe"
