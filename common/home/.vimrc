@@ -293,6 +293,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
+Plug 'preservim/tagbar'
 
 call plug#end()
 
@@ -364,13 +365,13 @@ nnoremap <S-Tab> <Cmd>tabp<CR>
 tnoremap <Tab> <Cmd>tabn<CR>
 tnoremap <S-Tab> <Cmd>tabp<CR>
 
-""" Buffer (Normal)
+""" Window (Normal)
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-""" Buffer (Terminal)
+""" Window (Terminal)
 tnoremap <C-j> <C-w>j
 tnoremap <C-k> <C-w>k
 tnoremap <C-h> <C-w>h
@@ -410,6 +411,9 @@ nnoremap K :copen<CR>
 nnoremap KK :cclose<CR>
 nnoremap <leader>h :cprev<CR>
 nnoremap <leader>l :cnext<CR>
+
+"" Outline (tagbar)
+nnoremap <F4> :TagbarToggle<CR>
 
 """ General C/C++ file navigation
 "nnoremap [[ {

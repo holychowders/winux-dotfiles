@@ -15,11 +15,9 @@ taskkill /f /im explorer.exe && start explorer.exe
 
 REM MAKE REQUIRED DIRECTORIES (AND UPDATE PATH)
 mkdir docs\cs
-
 mkdir docs\bin
-set "NEW_PATH=%PATH%;%USERPROFILE%\docs\bin"
+set "NEW_PATH=%PATH%;%USERPROFILE%\docs\bin;C:\Windows\System32;C:\Windows\System32\OpenSSH"
 setx /M PATH "%NEW_PATH%"
-
 
 REM SYMLINK CONFIGURATION FILES
 mklink %USERPROFILE%\.glzr\glazewm\config.yaml %USERPROFILE%\docs\cs\winux-dotfiles\win11\home\.glzr\glazewm\config.yaml
@@ -54,6 +52,7 @@ winget install UniversalCtags.Ctags
 winget install Gitleaks.Gitleaks
 
 winget install LLVM.LLVM
+winget install MSYS2.MSYS2
 winget install Python.Python.3.13
 winget install GoLang.Go
 winget install Rustlang.Rustup
