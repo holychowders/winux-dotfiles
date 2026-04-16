@@ -1,0 +1,220 @@
+#!/usr/bin/env bash
+
+# Error handling
+# TODO: Look into best practices with these things
+set -e  # Quit script with last error code when a command fails
+set -o pipefail  # Fail pipe when it finishes if a command within it failed
+set -u  # Fail when a command uses an unbound variable
+
+# Set directory variables
+dotfiles_dir="$HOME/docs/cs/winux-dotfiles"
+
+# Set directory creation commands
+mkdir_bin="mkdir -p $HOME/docs/bin"
+mkdir_config="mkdir -p $HOME/.config"
+mkdir_cgdb="mkdir -p $HOME/.cgdb/"
+mkdir_downloads="mkdir -p $HOME/docs/downloads/"
+
+# Startup message
+echo Running install script for winux-dotfiles/manjaro-i3
+
+# Check for --dry-run
+dry_run=false
+for arg in "$@"; do
+    if [ "$arg" = "--dry-run" ]; then
+        dry_run=true
+        echo "dry_run=true"
+    else
+        echo An invalid argument was provided. Only --dry-run is available. Quitting.
+        exit 1
+    fi
+done
+echo
+
+# Create required directories
+echo Creating required directories
+echo "$mkdir_bin"
+if [ $dry_run = false ]; then
+    eval "$mkdir_bin"
+fi
+
+echo "$mkdir_config"
+if [ $dry_run = false ]; then
+    eval "$mkdir_config"
+fi
+echo
+
+echo "$mkdir_cgdb"
+if [ $dry_run = false ]; then
+    eval "$mkdir_cgdb"
+fi
+
+echo "$mkdir_downloads"
+if [ $dry_run = false ]; then
+    eval "$mkdir_downloads"
+fi
+
+echo
+
+# Install packages
+pacman_packages="curl tmux git git-delta git-lfs myrepos gitleaks git-filter-repo pandoc ctags clang gcc cmake make python3 gdb cgdb cloc ffmpeg shellcheck shfmt w3m ranger lynx go rustup"
+go_packages="github.com/charmbracelet/glow/v2@latest"
+
+## Pacman packages
+echo Upgrading system
+pacman_upgrade_cmd="sudo pacman -Syyyu"
+echo "$pacman_upgrade_cmd"
+if [ $dry_run = false ]; then
+    eval "$pacman_upgrade_cmd"
+fi
+echo
+
+echo Installing pacman packages
+for pkg in $pacman_packages; do
+    cmd="sudo pacman -Syu --noconfirm $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+echo
+
+## Go packages
+echo 'Installing Go packages'
+for pkg in $go_packages; do
+    cmd="go install $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+echo
+
+## TMUX Plugin Manager
+echo Installing TMUX Plugin Manager
+tmux_plugin_manager_dir="$HOME/.tmux/plugins/tpm"
+tmux_plugin_manager_cmd="git clone https://github.com/tmux-plugins/tpm $tmux_plugin_manager_dir"
+
+proceed_with_tmux_plugin_manager_cmd="false"
+if [ -s "$tmux_plugin_manager_dir" ]; then
+    echo "WARNING: TMUX Plugin Manager directory $tmux_plugin_manager_dir already exists and is not empty (may already be installed). Would you like to remove it and try to install it? [yes/no]:"
+    read -r response
+    if [ "$response" = "yes" ]; then
+        tmux_plugin_manager_dir_rm_cmd="rm -rf $tmux_plugin_manager_dir"
+        echo "$tmux_plugin_manager_dir_rm_cmd"
+        if [ $dry_run = false ]; then
+            eval "$tmux_plugin_manager_dir_rm_cmd"
+        fi
+        proceed_with_tmux_plugin_manager_cmd="true"
+    fi
+else
+    proceed_with_tmux_plugin_manager_cmd="true"
+fi
+
+if [ $proceed_with_tmux_plugin_manager_cmd = "true" ]; then
+    echo "$tmux_plugin_manager_cmd"
+    if [ $dry_run = false ]; then
+        eval "$tmux_plugin_manager_cmd"
+    fi
+fi
+echo
+
+# Symlinks
+echo Creating symlinks
+
+## Custom bashrc
+bashrc_symlink_cmd="ln -svi $dotfiles_dir/manjaro-i3/home/.config/bashrc $HOME/.config"
+bashrc_source_cmd="echo source $HOME/.config/bashrc/etc.bash >> $HOME/.bashrc"
+echo "$bashrc_symlink_cmd"
+if [ $dry_run = false ]; then
+    eval "$bashrc_symlink_cmd"
+fi
+
+echo "Telling $HOME/.bashrc to source custom bash scripts"
+echo "$bashrc_source_cmd"
+if [ $dry_run = false ]; then
+    eval "$bashrc_source_cmd"
+fi
+echo
+
+## .gitconfig
+gitconfig_cmd="ln -svi $dotfiles_dir/common/home/.gitconfig $HOME/.gitconfig"
+echo "$gitconfig_cmd"
+if [ $dry_run = false ]; then
+    eval "$gitconfig_cmd"
+fi
+
+## .gitconfig themes
+gitconfig_themes_cmd="ln -svi $dotfiles_dir/common/home/themes.gitconfig $HOME/themes.gitconfig"
+echo "$gitconfig_themes_cmd"
+if [ $dry_run = false ]; then
+    eval "$gitconfig_themes_cmd"
+fi
+
+## TMUX
+tmux_cmd="ln -svi $dotfiles_dir/manjaro-i3/home/.tmux.conf $HOME/.tmux.conf"
+echo "$tmux_cmd"
+if [ $dry_run = false ]; then
+    eval "$tmux_cmd"
+fi
+
+## Vim
+vimrc_cmd="ln -svi $dotfiles_dir/common/home/.vimrc $HOME/.vimrc"
+echo "$vimrc_cmd"
+if [ $dry_run = false ]; then
+    eval "$vimrc_cmd"
+fi
+echo
+
+## gdb
+gdb_cmd="ln -svi $dotfiles_dir/manjaro-i3/home/.gdbinit $HOME/.gdbinit"
+echo "$gdb_cmd"
+if [ $dry_run = false ]; then
+    eval "$gdb_cmd"
+fi
+echo
+
+## cgdb
+cgdb_cmd="ln -svi $dotfiles_dir/manjaro-i3/home/.cgdb/cgdbrc $HOME/.cgdb/cgdbrc"
+echo "$cgdb_cmd"
+if [ $dry_run = false ]; then
+    eval "$cgdb_cmd"
+fi
+echo
+
+## Rustup (Rust)
+rustup_cmd="rustup default stable"
+echo "$rustup_cmd"
+if [ $dry_run = false ]; then
+    eval "$rustup_cmd"
+fi
+echo
+
+# Fonts
+## Detect environment
+if [ -n "$DISPLAY" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    echo "Detected desktop environment: Installing fonts"
+    if [ $dry_run = false ]; then
+## Fonts directory
+        mkdir -p $HOME/.local/share/fonts/
+
+## Begin installing fonts
+        pushd $HOME/docs/downloads/
+
+### Install Red Hat Mono
+        curl -L "https://github.com/RedHatOfficial/RedHatFont/archive/refs/tags/4.1.0.tar.gz" -o "RedHatFont-4.1.0.tar.gz"
+        tar -xf "RedHatFont-4.1.0.tar.gz"
+        cp $PWD/RedHatFont-4.1.0/fonts/Mono/ttf/*.ttf $HOME/.local/share/fonts/
+
+## Finish install fonts
+        echo "Updating font cache"
+        fc-cache -f -v  # Update font cache
+        popd
+    fi
+fi
+
+# Finishing message
+echo Install script finished
+if [ $dry_run = true ]; then
+    echo "dry_run=true"
+fi
