@@ -59,6 +59,7 @@ winget install Rustlang.Rustup
 wsl --install -d Ubuntu
 winget install Docker.DockerDesktop
 winget install Kubernetes.kind
+winget install BurntSushi.ripgrep.MSVC
 winget install junegunn.fzf
 
 rem File Pilot
