@@ -371,6 +371,7 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>c :Commands<CR>
 nnoremap <leader>' :Marks<CR>
 nnoremap <leader>l :Lines<CR>
+nnoremap <leader>g :RG<CR>
 
 "" Code exploration
 "nnoremap <leader>o :Lexplore<CR>
