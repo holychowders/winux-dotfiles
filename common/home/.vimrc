@@ -86,8 +86,8 @@ set belloff=all  " Please, STFU
 "set number
 "set relativenumber
 
-set scrolloff=2
-set sidescrolloff=1
+set scrolloff=15
+set sidescrolloff=0
 
 set cursorline
 set cursorlineopt=both
@@ -163,12 +163,16 @@ function! SetHighlights()
   hi WhitespaceTrail ctermbg=grey
   match WhitespaceTrail '\s\+$'  " Highlight trailing whitespace
 
-  hi StatusLine ctermfg=grey ctermbg=none cterm=none
-  hi StatusLineNC ctermfg=grey ctermbg=none cterm=none
+  hi TabLineFill   ctermfg=none ctermbg=none cterm=none
+  hi TabLine       ctermfg=white ctermbg=none cterm=none
+  hi TabLineSel    ctermfg=white ctermbg=none cterm=bold
+
+  hi StatusLine       ctermfg=black ctermbg=white cterm=bold
+  hi StatusLineNC     ctermfg=black ctermbg=darkgrey cterm=none
+  hi StatusLineTerm   ctermfg=black ctermbg=darkgreen cterm=none
+  hi StatusLineTermNC ctermfg=darkgreen ctermbg=none cterm=none
 
   hi QuickFixLine ctermfg=black ctermbg=darkgreen cterm=none
-  hi StatusLineTerm ctermfg=black ctermbg=darkgreen cterm=none
-  hi StatusLineTermNC ctermfg=darkgreen ctermbg=none cterm=none
   hi DebugPC ctermfg=black ctermbg=darkgreen cterm=none
   hi DebugBreakpoint ctermfg=black ctermbg=darkgreen cterm=none
   hi DebugBreakpointDisabled ctermfg=black ctermbg=red cterm=none
@@ -427,7 +431,7 @@ else " Unix path seperators
   tnoremap <F8> tools/run<CR>
 endif
 
-nnoremap <leader>j :make<CR>
+nnoremap <leader>j :make!<CR>
 nnoremap K :copen<CR>
 nnoremap KK :cclose<CR>
 nnoremap <leader>h :cprev<CR>
