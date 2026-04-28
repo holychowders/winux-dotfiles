@@ -164,8 +164,8 @@ function! SetHighlights()
   match WhitespaceTrail '\s\+$'  " Highlight trailing whitespace
 
   hi TabLineFill   ctermfg=none ctermbg=none cterm=none
-  hi TabLine       ctermfg=white ctermbg=none cterm=none
-  hi TabLineSel    ctermfg=white ctermbg=none cterm=bold
+  hi TabLine       ctermfg=grey ctermbg=none cterm=none
+  hi TabLineSel    ctermfg=black ctermbg=white cterm=bold
 
   hi StatusLine       ctermfg=black ctermbg=white cterm=bold
   hi StatusLineNC     ctermfg=black ctermbg=darkgrey cterm=none
