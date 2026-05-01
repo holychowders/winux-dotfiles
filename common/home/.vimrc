@@ -135,7 +135,7 @@ set nofixendofline
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 set clipboard=unnamedplus
 
-set colorcolumn=120
+set colorcolumn=150
 autocmd FileType markdown set colorcolumn=0  " TODO: Just don't enable for Markdown
 
 autocmd FileType gitcommit set spell
