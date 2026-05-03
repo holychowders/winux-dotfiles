@@ -1,0 +1,15 @@
+return {
+    { "erizocosmico/vim-firewatch",       lazy = false },
+    { "LuRsT/austere.vim",               lazy = false },
+    { "kooparse/vim-color-desert-night",  lazy = false },
+    { "nvimdev/oceanic-material",         lazy = false },
+    { "adrian5/oceanic-next-vim",         lazy = false },
+    { "elvessousa/sobrio",               lazy = false },
+    { "oni0002/neg.vim",                 lazy = false },
+    { "elianiva/gruvy.nvim",             lazy = false },
+    { "murtaza-u/gruvqueen",             lazy = false },
+    { "cryptomilk/nightcity.nvim",       lazy = false },
+    { "girishji/declutter.nvim",         lazy = false },
+    { "piyush-ppradhan/naysayer.vim",    lazy = false },
+    { "kevinlawler/amberchrome",         lazy = false },
+}
