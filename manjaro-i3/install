@@ -57,7 +57,7 @@ fi
 echo
 
 # Install packages
-pacman_packages="curl tmux git git-delta git-lfs myrepos gitleaks git-filter-repo pandoc ctags clang gcc cmake make python3 gdb cgdb cloc ffmpeg shellcheck shfmt w3m ranger lynx go rustup"
+pacman_packages="curl tmux git git-delta git-lfs myrepos gitleaks git-filter-repo pandoc ctags clang gcc cmake make python3 gdb cgdb cloc ffmpeg shellcheck shfmt w3m ranger lynx go rustup neovim nodejs npm"
 go_packages="github.com/charmbracelet/glow/v2@latest"
 
 ## Pacman packages
@@ -83,6 +83,24 @@ echo
 echo 'Installing Go packages'
 for pkg in $go_packages; do
     cmd="go install $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+echo
+
+## NPM hardening
+echo Configuring npm
+npm_config_settings=(
+    "ignore-scripts true"
+    "fund false"
+    "audit true"
+    "strict-ssl true"
+    "save-exact true"
+)
+for setting in "${npm_config_settings[@]}"; do
+    cmd="npm config set $setting"
     echo "$cmd"
     if [ $dry_run = false ]; then
         eval "$cmd"
@@ -158,11 +176,11 @@ if [ $dry_run = false ]; then
     eval "$tmux_cmd"
 fi
 
-## Vim
-vimrc_cmd="ln -svi $dotfiles_dir/common/home/.vimrc $HOME/.vimrc"
-echo "$vimrc_cmd"
+## Neovim
+nvim_cmd="ln -svi $dotfiles_dir/common/home/.config/nvim $HOME/.config/nvim"
+echo "$nvim_cmd"
 if [ $dry_run = false ]; then
-    eval "$vimrc_cmd"
+    eval "$nvim_cmd"
 fi
 echo
 

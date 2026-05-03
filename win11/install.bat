@@ -21,9 +21,7 @@ setx /M PATH "%NEW_PATH%"
 
 REM SYMLINK CONFIGURATION FILES
 mklink %USERPROFILE%\.glzr\glazewm\config.yaml %USERPROFILE%\docs\cs\winux-dotfiles\win11\home\.glzr\glazewm\config.yaml
-REM mklink %USERPROFILE%\.vimrc %USERPROFILE%\docs\cs\winux-dotfiles\common\home\.vimrc
-mkdir %LOCALAPPDATA%\nvim
-mklink %LOCALAPPDATA%\nvim\init.vim %USERPROFILE%\docs\cs\winux-dotfiles\common\home\.vimrc
+mklink /J "%LOCALAPPDATA%\nvim" "%USERPROFILE%\docs\cs\winux-dotfiles\common\home\.config\nvim"
 mklink %USERPROFILE%\.gitconfig %USERPROFILE%\docs\cs\winux-dotfiles\common\home\.gitconfig
 mklink %USERPROFILE%\themes.gitconfig %USERPROFILE%\docs\cs\winux-dotfiles\common\home\themes.gitconfig
 
@@ -53,6 +51,15 @@ winget install Gitleaks.Gitleaks
 
 winget install LLVM.LLVM
 winget install MSYS2.MSYS2
+winget install OpenJS.NodeJS.LTS
+
+REM NPM HARDENING
+npm config set ignore-scripts true
+npm config set fund false
+npm config set audit true
+npm config set strict-ssl true
+npm config set save-exact true
+
 winget install Python.Python.3.13
 winget install GoLang.Go
 winget install Rustlang.Rustup

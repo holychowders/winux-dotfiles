@@ -57,9 +57,9 @@ fi
 echo
 
 # Install packages
-apt_packages="curl vim-nox git git-delta git-lfs myrepos gitleaks git-filter-repo pandoc exuberant-ctags clang clang-format clang-tidy gcc cmake make python-is-python3 gdb cgdb cloc ffmpeg shellcheck shfmt w3m ranger lynx ripgrep"
+apt_packages="curl vim-nox git git-delta git-lfs myrepos gitleaks git-filter-repo pandoc exuberant-ctags clang clang-format clang-tidy gcc cmake make python-is-python3 gdb cgdb cloc ffmpeg shellcheck shfmt w3m ranger lynx ripgrep nodejs npm"
 snap_packages="glow"
-snap_packages_classic="rustup gh go"
+snap_packages_classic="rustup gh go nvim"
 go_packages="github.com/charmbracelet/glow/v2@latest"
 
 ## Apt packages
@@ -106,6 +106,24 @@ done
 echo 'Installing Go packages'
 for pkg in $go_packages; do
     cmd="go install $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+echo
+
+## NPM hardening
+echo Configuring npm
+npm_config_settings=(
+    "ignore-scripts true"
+    "fund false"
+    "audit true"
+    "strict-ssl true"
+    "save-exact true"
+)
+for setting in "${npm_config_settings[@]}"; do
+    cmd="npm config set $setting"
     echo "$cmd"
     if [ $dry_run = false ]; then
         eval "$cmd"
@@ -181,11 +199,11 @@ if [ $dry_run = false ]; then
     eval "$tmux_cmd"
 fi
 
-## Vim
-vimrc_cmd="ln -svi $dotfiles_dir/common/home/.vimrc $HOME/.vimrc"
-echo "$vimrc_cmd"
+## Neovim
+nvim_cmd="ln -svi $dotfiles_dir/common/home/.config/nvim $HOME/.config/nvim"
+echo "$nvim_cmd"
 if [ $dry_run = false ]; then
-    eval "$vimrc_cmd"
+    eval "$nvim_cmd"
 fi
 echo
 
