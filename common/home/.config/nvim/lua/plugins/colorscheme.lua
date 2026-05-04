@@ -1,12 +1,7 @@
 return {
-    "ellisonleao/gruvbox.nvim",
+    "kungfusheep/mfd.nvim",
     priority = 1000,
-    opts = {
-        contrast = "hard",
-        transparent_mode = true,
-    },
-    config = function(_, opts)
-        require("gruvbox").setup(opts)
-        vim.cmd("colorscheme gruvbox")
+    config = function()
+        vim.cmd("colorscheme holychowders-whiteboard")
     end,
 }

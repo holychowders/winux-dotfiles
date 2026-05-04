@@ -37,6 +37,7 @@ o.swapfile    = false
 o.writebackup = false
 
 -- Display
+o.background     = "dark"
 o.number         = true
 o.relativenumber = true
 o.cursorline     = true

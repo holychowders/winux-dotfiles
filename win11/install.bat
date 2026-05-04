@@ -63,6 +63,7 @@ npm config set save-exact true
 winget install Python.Python.3.13
 winget install GoLang.Go
 winget install Rustlang.Rustup
+cargo install tree-sitter-cli
 wsl --install -d Ubuntu
 winget install Docker.DockerDesktop
 winget install Kubernetes.kind

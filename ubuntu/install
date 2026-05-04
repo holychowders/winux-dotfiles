@@ -231,6 +231,18 @@ if [ $dry_run = false ]; then
 fi
 echo
 
+## Cargo packages
+cargo_packages="tree-sitter-cli"
+echo 'Installing cargo packages'
+for pkg in $cargo_packages; do
+    cmd="cargo install $pkg"
+    echo "$cmd"
+    if [ $dry_run = false ]; then
+        eval "$cmd"
+    fi
+done
+echo
+
 # Fonts
 ## Detect environment
 if [ -n "$DISPLAY" ] || [ -n "$WAYLAND_DISPLAY" ]; then

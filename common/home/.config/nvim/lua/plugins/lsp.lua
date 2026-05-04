@@ -5,6 +5,9 @@ return {
             { "williamboman/mason.nvim" },
             { "williamboman/mason-lspconfig.nvim" },
             { "saghen/blink.cmp" },
+            { "j-hui/fidget.nvim", opts = {
+                notification = { window = { normal_hl = "Normal", winblend = 0 } },
+            }},
         },
         config = function()
             require("mason").setup()
