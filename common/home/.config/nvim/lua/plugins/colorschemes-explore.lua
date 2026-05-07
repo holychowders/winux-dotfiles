@@ -3,6 +3,7 @@ return {
     -- Favorites
     -- =========================================================================
 
+    { "elianiva/gruvy.nvim",                 lazy = false },
     { "rafikdraoui/couleurs.vim",            lazy = false },
     { "kooparse/vim-color-desert-night",     lazy = false },
 

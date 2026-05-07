@@ -23,8 +23,12 @@ return {
                     map("n", "K",          vim.lsp.buf.hover,         opts)
                     map("n", "<leader>rn", vim.lsp.buf.rename,        opts)
                     map("n", "<leader>ca", vim.lsp.buf.code_action,   opts)
-                    map("n", "[d",         vim.diagnostic.goto_prev,  opts)
-                    map("n", "]d",         vim.diagnostic.goto_next,  opts)
+                    map("n", "[d",  vim.diagnostic.goto_prev,  opts)
+                    map("n", "]d",  vim.diagnostic.goto_next,  opts)
+                    map("n", "[e",  function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR   }) end, opts)
+                    map("n", "]e",  function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR   }) end, opts)
+                    map("n", "[w",  function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN    }) end, opts)
+                    map("n", "]w",  function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN    }) end, opts)
                     map("n", "<leader>e",  vim.diagnostic.open_float, opts)
                 end,
             })
@@ -46,6 +50,7 @@ return {
                     "omnisharp",
                     "bashls",
                     "marksman",
+                    "lua_ls",
                 },
                 handlers = {
                     function(server)
