@@ -3,14 +3,35 @@
 vim.cmd('highlight clear')
 vim.g.colors_name = 'holychowders-whiteboard'
 
+local term = {
+  black         = vim.g.terminal_color_0,
+  red           = vim.g.terminal_color_1,
+  green         = vim.g.terminal_color_2,
+  yellow        = vim.g.terminal_color_3,
+  blue          = vim.g.terminal_color_4,
+  magenta       = vim.g.terminal_color_5,
+  cyan          = vim.g.terminal_color_6,
+  white         = vim.g.terminal_color_7,
+
+  bright_black  = vim.g.terminal_color_8,
+  bright_red    = vim.g.terminal_color_9,
+  bright_green  = vim.g.terminal_color_10,
+  bright_yellow = vim.g.terminal_color_11,
+  bright_blue   = vim.g.terminal_color_12,
+  bright_magenta= vim.g.terminal_color_13,
+  bright_cyan   = vim.g.terminal_color_14,
+  bright_white  = vim.g.terminal_color_15,
+}
+
 local c = {
   bg           = 'NONE',
-  fg           = '#909090',
+  fg           = '#FDF1CA',
 
-  white        = '#ffffff',
+  white        = '#E1D2AB',
   black        = '#000000',
-  light_grey   = '#C0C0C0',
-  dark_grey    = '#686868',
+  light_grey   = '#9B947C',
+  dark_grey    = '#686149',
+  dim_gold     = '#463907',
   dim          = '#404040',
 
   dim_red      = '#402020',
@@ -20,7 +41,8 @@ local c = {
 
   subtle       = '#2E2E2E',
   visual       = '#242424',
-  cursorline   = '#202020',
+  line         = '#202020',
+  cursorline         = '#101010',
 
   border       = '#2E2E2E',
   float_bg     = '#1C1C1C',
@@ -55,16 +77,17 @@ hi('CursorVisual',  { fg = c.bg, bg = '#686868' })
 hi('CursorReplace', { fg = c.bg, bg = '#903838' })
 hi('CursorCommand', { fg = c.bg, bg = '#C0C0C0' })
 hi('CursorLine',   { bg = c.cursorline })
-hi('CursorColumn', { bg = c.cursorline })
+hi('CursorColumn', { bg = c.line })
+hi('ColorColumn',  { bg = c.line })
 hi('LineNr',       { fg = c.subtle })
-hi('CursorLineNr', { fg = c.fg, bold = true })
+hi('CursorLineNr', { fg = c.light_grey })
 hi('SignColumn',   { bg = 'NONE' })
 hi('VertSplit',    { fg = c.border, bg = c.bg })
 hi('WinSeparator', { fg = c.border, bg = c.bg })
-hi('StatusLine',   { fg = c.fg, bg = c.cursorline })
-hi('StatusLineNC', { fg = c.dim, bg = c.cursorline })
-hi('TabLine',      { fg = c.dim, bg = c.cursorline })
-hi('TabLineFill',  { bg = c.cursorline })
+hi('StatusLine',   { fg = c.fg, bg = c.line })
+hi('StatusLineNC', { fg = c.dim, bg = c.line })
+hi('TabLine',      { fg = c.dim, bg = c.line })
+hi('TabLineFill',  { bg = c.line })
 hi('TabLineSel',   { fg = c.fg, bg = c.bg, bold = true })
 hi('WinBar',       { fg = c.fg, bg = c.bg, bold = true })
 hi('WinBarNC',     { fg = c.dim, bg = c.bg })
@@ -82,7 +105,7 @@ hi('Search',       { fg = c.black, bg = c.fg, bold = true })
 hi('IncSearch',    { fg = c.black, bg = c.white, bold = true })
 hi('CurSearch',    { fg = c.black, bg = c.white, bold = true })
 hi('MatchParen',   { fg = c.fg, bold = true, underline = true })
-hi('Folded',       { fg = c.dim, bg = c.cursorline })
+hi('Folded',       { fg = c.dim, bg = c.line })
 hi('FoldColumn',   { fg = c.dim, bg = 'NONE' })
 hi('NonText',      { fg = c.subtle })
 hi('SpecialKey',   { fg = c.subtle })
@@ -96,7 +119,7 @@ hi('MoreMsg',      { fg = c.fg, bold = true })
 hi('ModeMsg',      { fg = c.fg, bold = true })
 hi('Question',     { fg = c.fg, bold = true })
 hi('WildMenu',     { fg = c.bg, bg = c.fg })
-hi('QuickFixLine', { bg = c.cursorline, bold = true })
+hi('QuickFixLine', { bg = c.line, bold = true })
 hi('Conceal',      { fg = c.dim })
 hi('SpellBad',     { undercurl = true, sp = c.fg })
 hi('SpellCap',     { undercurl = true, sp = c.dim })
@@ -115,8 +138,8 @@ hi('Character',    { fg = c.fg })
 hi('Number',       { fg = c.green })
 hi('Boolean',      { fg = c.fg })
 hi('Float',        { fg = c.green })
-hi('Identifier',   { fg = c.light_grey })
-hi('Function',     { fg = c.fg, bold = true })
+hi('Identifier',   { fg = c.fg })
+hi('Function',     { fg = c.white, bold = true })
 hi('Statement',    { fg = c.amber })
 hi('Conditional',  { fg = c.amber })
 hi('Repeat',       { fg = c.amber })
@@ -127,7 +150,7 @@ hi('Exception',    { fg = c.amber })
 hi('PreProc',      { fg = c.fg, italic = true })
 hi('Include',      { fg = c.fg, italic = true })
 hi('Define',       { fg = c.fg, italic = true })
-hi('Macro',        { fg = c.fg, italic = true })
+hi('Macro',        { fg = c.white, bold = true })
 hi('PreCondit',    { fg = c.fg, italic = true })
 hi('Type',         { fg = c.dark_grey })
 hi('StorageClass', { fg = c.dark_grey })
@@ -145,13 +168,13 @@ hi('Error',        { fg = c.fg })
 hi('Todo',         { fg = c.fg, bg = c.bg })
 
 -- Treesitter
-hi('@variable',           { fg = c.light_grey })
-hi('@variable.builtin',   { fg = c.light_grey })
-hi('@variable.parameter', { fg = c.light_grey })
-hi('@variable.member',    { fg = c.light_grey })
+hi('@variable',           { fg = c.fg })
+hi('@variable.builtin',   { fg = c.fg })
+hi('@variable.parameter', { fg = c.fg })
+hi('@variable.member',    { fg = c.fg })
 hi('@constant',           { fg = c.fg })
 hi('@constant.builtin',   { fg = c.fg })
-hi('@constant.macro',     { fg = c.fg, italic = true })
+hi('@constant.macro',     { fg = c.light_grey, italic = true })
 hi('@module',             { fg = c.dark_grey })
 hi('@label',              { fg = c.fg })
 hi('@string',             { fg = c.green })
@@ -162,12 +185,12 @@ hi('@number',             { fg = c.green })
 hi('@boolean',            { fg = c.fg })
 hi('@float',              { fg = c.green })
 hi('@number.float',       { fg = c.green })
-hi('@function',           { fg = c.fg, bold = true })
-hi('@function.builtin',   { fg = c.fg, bold = true })
-hi('@function.call',      { fg = c.fg, bold = true })
-hi('@function.macro',     { fg = c.fg, bold = true, italic = true })
-hi('@method',             { fg = c.fg, bold = true })
-hi('@method.call',        { fg = c.fg, bold = true })
+hi('@function',           { fg = c.white, bold = true })
+hi('@function.builtin',   { fg = c.white, bold = true })
+hi('@function.call',      { fg = c.white, bold = true })
+hi('@function.macro',     { fg = c.white, bold = true })
+hi('@method',             { fg = c.white, bold = true })
+hi('@method.call',        { fg = c.white, bold = true })
 hi('@constructor',        { fg = c.fg })
 hi('@keyword',            { fg = c.fg })
 hi('@keyword.function',   { fg = c.fg })
@@ -211,14 +234,14 @@ hi('@text.strike',        { fg = c.fg, strikethrough = true })
 hi('@text.title',         { fg = c.fg })
 
 -- Markdown headings (render-markdown.nvim)
-hi('RenderMarkdownH1',    { fg = c.red, bold = true })
-hi('RenderMarkdownH2',    { fg = c.red, bold = true })
-hi('RenderMarkdownH3',    { fg = c.fg, bold = true })
-hi('RenderMarkdownH4',    { fg = c.fg, bold = true })
-hi('RenderMarkdownH1Bg',  { fg = c.red, bold = true })
-hi('RenderMarkdownH2Bg',  { fg = c.red, bold = true })
-hi('RenderMarkdownH3Bg',  { fg = c.fg, bold = true })
-hi('RenderMarkdownH4Bg',  { fg = c.fg, bold = true })
+hi('RenderMarkdownH1',    { fg = c.green, bold = true })
+hi('RenderMarkdownH2',    { fg = c.green, bold = true })
+hi('RenderMarkdownH3',    { fg = c.green, bold = false })
+hi('RenderMarkdownH4',    { fg = c.green, bold = false })
+hi('RenderMarkdownH1Bg',  { fg = c.green, bold = true })
+hi('RenderMarkdownH2Bg',  { fg = c.green, bold = true })
+hi('RenderMarkdownH3Bg',  { fg = c.green, bold = false })
+hi('RenderMarkdownH4Bg',  { fg = c.green, bold = false })
 hi('RenderMarkdownCode',  { bg = c.visual })
 hi('RenderMarkdownCodeInline', { bg = c.visual })
 hi('RenderMarkdownBullet', { fg = c.dim })
@@ -229,11 +252,12 @@ hi('RenderMarkdownInfo',    { fg = c.dim })
 hi('RenderMarkdownHint',    { fg = c.dim })
 hi('RenderMarkdownWarn',    { fg = c.fg })
 hi('RenderMarkdownError',   { fg = c.fg })
-hi('@markup.heading.1.markdown', { fg = c.red, bold = true })
-hi('@markup.heading.2.markdown', { fg = c.red, bold = true })
-hi('@markup.heading.3.markdown', { fg = c.fg, bold = true })
-hi('@markup.heading.4.markdown', { fg = c.fg, bold = true })
+hi('@markup.heading.1.markdown', { fg = c.green, bold = true })
+hi('@markup.heading.2.markdown', { fg = c.green, bold = true })
+hi('@markup.heading.3.markdown', { fg = c.green, bold = false })
+hi('@markup.heading.4.markdown', { fg = c.green, bold = false })
 hi('@markup.raw.markdown_inline', { bg = c.visual })
+hi('@markup.list.checked', { fg = c.green, bold = false })
 hi('@text.literal',       { fg = c.fg })
 hi('@text.uri',           { fg = c.fg, underline = true })
 hi('@text.reference',     { fg = c.fg })
@@ -266,29 +290,30 @@ hi('DiagnosticSignHint',  { fg = c.fg })
 hi('DiagnosticSignOk',    { fg = c.dim })
 
 -- LSP References & Hints
-hi('LspReferenceText',    { bg = c.cursorline })
-hi('LspReferenceRead',    { bg = c.cursorline })
-hi('LspReferenceWrite',   { bg = c.cursorline, bold = true })
+hi('LspReferenceText',    { bg = c.line })
+hi('LspReferenceRead',    { bg = c.line })
+hi('LspReferenceWrite',   { bg = c.line, bold = true })
 hi('LspSignatureActiveParameter', { bg = c.visual, bold = true })
 hi('LspCodeLens',         { fg = c.dim })
 hi('LspCodeLensSeparator', { fg = c.dim })
-hi('LspInlayHint',        { fg = c.dim, bg = c.cursorline, italic = true })
+hi('LspInlayHint',        { fg = c.dim, bg = c.line, italic = true })
 hi('LspInfoBorder',       { fg = c.dim, bg = c.float_bg })
 
 -- Semantic tokens (LSP)
 hi('@lsp.type.class',         { fg = c.dark_grey })
+hi('@lsp.type.class.markdown', { })
 hi('@lsp.type.struct',        { fg = c.dark_grey })
 hi('@lsp.type.interface',     { fg = c.dark_grey })
 hi('@lsp.type.enum',          { fg = c.dark_grey })
-hi('@lsp.type.parameter',     { fg = c.light_grey })
-hi('@lsp.type.variable',      { fg = c.light_grey })
+hi('@lsp.type.parameter',     { fg = c.fg })
+hi('@lsp.type.variable',      { fg = c.fg })
 hi('@lsp.type.property',      { fg = c.fg })
-hi('@lsp.type.function',      { fg = c.fg, bold = true })
-hi('@lsp.type.method',        { fg = c.fg, bold = true })
+hi('@lsp.type.function',      { fg = c.white, bold = true })
+hi('@lsp.type.method',        { fg = c.white, bold = true })
 hi('@lsp.type.keyword',       { })
 hi('@lsp.mod.controlFlow',    { fg = c.amber })
 hi('@lsp.type.namespace',     { fg = c.dark_grey })
-hi('@lsp.type.macro',         { fg = c.fg, bold = true, italic = true })
+hi('@lsp.type.macro',         { fg = c.white, bold = true })
 hi('@lsp.type.type',          { fg = c.dark_grey })
 hi('@lsp.type.typeParameter', { fg = c.fg })
 hi('@lsp.mod.defaultLibrary', { })
@@ -298,11 +323,11 @@ hi('GitSignsAdd',    { fg = c.green })
 hi('GitSignsChange', { fg = c.amber })
 hi('GitSignsDelete', { fg = c.red })
 hi('GitSignsCurrentLineBlame', { fg = c.dim, italic = true })
-hi('GitSignsAddPreview',    { fg = c.fg, bg = c.cursorline })
-hi('GitSignsDeletePreview', { fg = c.red, bg = c.cursorline })
+hi('GitSignsAddPreview',    { fg = c.fg, bg = c.line })
+hi('GitSignsDeletePreview', { fg = c.red, bg = c.line })
 hi('GitSignsAddInline',     { bg = '#141A14' })
 hi('GitSignsDeleteInline',  { bg = '#1A1414' })
-hi('GitSignsChangeInline',  { bg = c.cursorline })
+hi('GitSignsChangeInline',  { bg = c.line })
 
 -- Telescope
 hi('TelescopeNormal',        { fg = c.fg, bg = c.float_bg })
@@ -363,11 +388,11 @@ hi('SnacksWinBarNC',         { fg = c.dim })
 hi('SnacksBackdrop',         { bg = c.border, blend = 80 })
 hi('SnacksPicker',           { fg = c.fg, bg = c.float_bg })
 hi('SnacksPickerPreview',    { fg = c.fg, bg = c.float_bg })
-hi('SnacksPickerPreviewCursorLine', { bg = c.cursorline })
+hi('SnacksPickerPreviewCursorLine', { bg = c.line })
 hi('SnacksPickerPreviewBorder', { fg = c.dim, bg = c.float_bg })
 hi('SnacksPickerPreviewFooter', { fg = c.dim, bg = c.float_bg })
 hi('SnacksPickerList',       { fg = c.fg, bg = c.float_bg })
-hi('SnacksPickerListCursorLine', { bg = c.cursorline })
+hi('SnacksPickerListCursorLine', { bg = c.line })
 hi('SnacksPickerBorder',     { fg = c.dim, bg = c.float_bg })
 hi('SnacksPickerInputBorder', { fg = c.dim, bg = c.float_bg })
 hi('SnacksPickerInputTitle', { fg = c.bg, bg = c.fg, bold = true })
@@ -387,22 +412,22 @@ hi('SnacksIndentScope',      { fg = c.dim })
 hi('FidgetTitle',  { fg = c.fg, bold = true })
 hi('FidgetTask',   { fg = c.dim })
 
-vim.g.terminal_color_0  = c.bg
-vim.g.terminal_color_1  = c.fg
-vim.g.terminal_color_2  = c.fg
-vim.g.terminal_color_3  = c.fg
-vim.g.terminal_color_4  = c.fg
-vim.g.terminal_color_5  = c.fg
-vim.g.terminal_color_6  = c.fg
-vim.g.terminal_color_7  = c.fg
-vim.g.terminal_color_8  = c.dim
-vim.g.terminal_color_9  = c.red
-vim.g.terminal_color_10 = c.red
-vim.g.terminal_color_11 = c.fg
-vim.g.terminal_color_12 = c.fg
-vim.g.terminal_color_13 = c.fg
-vim.g.terminal_color_14 = c.fg
-vim.g.terminal_color_15 = c.red
+--vim.g.terminal_color_0  = c.bg
+--vim.g.terminal_color_1  = c.fg
+--vim.g.terminal_color_2  = c.fg
+--vim.g.terminal_color_3  = c.fg
+--vim.g.terminal_color_4  = c.fg
+--vim.g.terminal_color_5  = c.fg
+--vim.g.terminal_color_6  = c.fg
+--vim.g.terminal_color_7  = c.fg
+--vim.g.terminal_color_8  = c.dim
+--vim.g.terminal_color_9  = c.red
+--vim.g.terminal_color_10 = c.red
+--vim.g.terminal_color_11 = c.fg
+--vim.g.terminal_color_12 = c.fg
+--vim.g.terminal_color_13 = c.fg
+--vim.g.terminal_color_14 = c.fg
+--vim.g.terminal_color_15 = c.red
 
 -- monotone icons (dimmed to match comments)
 require('mfd').override_icons(c.dim)

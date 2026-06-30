@@ -61,12 +61,8 @@ local function warn(msg) vim.notify(msg, vim.log.levels.WARN) end
 
 local ft_commands = {
     c = {
-        format = function()
-            if not try_tools("format") then vim.cmd("!clang-format -i " .. vim.fn.expand("%")) end
-        end,
-        check = function()
-            if not try_tools("check") then vim.cmd("!clang-tidy " .. vim.fn.expand("%")) end
-        end,
+        format = function() if not try_tools("format") then vim.cmd("!clang-format -i " .. vim.fn.expand("%")) end end,
+        check = function() if not try_tools("check") then vim.cmd("!clang-tidy " .. vim.fn.expand("%")) end end,
         build = function()
             if not try_tools("build") then
                 if vim.fn.filereadable("CMakeLists.txt") == 1 then vim.cmd("!cmake --build build")
@@ -74,9 +70,7 @@ local ft_commands = {
                 else warn("No build system found") end
             end
         end,
-        run = function()
-            if not try_tools("run") then warn("No run script found") end
-        end,
+        run = function() if not try_tools("run") then warn("No run script found") end end,
     },
 
     rust = {
@@ -153,3 +147,7 @@ map("n", "<F5>", function() run_ft_cmd("format") end)
 map("n", "<F6>", function() run_ft_cmd("check")  end)
 map("n", "<F7>", function() run_ft_cmd("build")  end)
 map("n", "<F8>", function() run_ft_cmd("run")    end)
+
+map("n", "<leader>p", "<Cmd>lua vim.diagnostic.enable(false)<CR>")
+map("n", "<leader>pp", "<Cmd>lua vim.diagnostic.enable(true)<CR>")
+

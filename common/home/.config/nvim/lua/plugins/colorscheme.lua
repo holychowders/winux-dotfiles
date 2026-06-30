@@ -1,8 +1,7 @@
 return {
-    "elianiva/gruvy.nvim",
+    "kungfusheep/mfd.nvim",
     priority = 1000,
-    dependencies = { "rktjmp/lush.nvim" },
     config = function()
-        vim.cmd("colorscheme gruvy")
+        vim.cmd("colorscheme holychowders-whiteboard")
     end,
 }
