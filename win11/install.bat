@@ -31,6 +31,8 @@ mklink %APPDATA%\yazi\config\yazi.toml %USERPROFILE%\docs\cs\winux-dotfiles\win1
 mklink %APPDATA%\yazi\config\theme.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\theme.toml
 mklink %APPDATA%\yazi\config\package.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\package.toml
 
+mklink %USERPROFILE%\Documents\WindowsPowerShell\MicroSoft.PowerShell_profile.ps1 %USERPROFILE%\docs\cs\winux-dotfiles\win11\MicroSoft.PowerShell_profile.ps1
+
 REM INSTALL APPLICATIONS
 winget install OO-Software.ShutUp10
 winget install Microsoft.VisualStudio.2022.Community
