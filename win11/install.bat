@@ -1,4 +1,4 @@
-@echo off
+#@echo off
 
 REM TODO:
 REM   FIXME: Fix Vim installation. Use Nvim for now.
@@ -7,6 +7,8 @@ REM REWORK
 echo **REWORK IN PROGRESS: USE WITH CAUTION**
 echo **Exiting**
 exit /B 1
+
+setx EDITOR nvim
 
 REM SWITCH SYSTEM-WIDE THEME TO DARK MODE
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f
@@ -24,6 +26,10 @@ mklink %USERPROFILE%\.glzr\glazewm\config.yaml %USERPROFILE%\docs\cs\winux-dotfi
 mklink /J "%LOCALAPPDATA%\nvim" "%USERPROFILE%\docs\cs\winux-dotfiles\common\home\.config\nvim"
 mklink %USERPROFILE%\.gitconfig %USERPROFILE%\docs\cs\winux-dotfiles\common\home\.gitconfig
 mklink %USERPROFILE%\themes.gitconfig %USERPROFILE%\docs\cs\winux-dotfiles\common\home\themes.gitconfig
+
+mklink %APPDATA%\yazi\config\yazi.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\yazi.toml
+mklink %APPDATA%\yazi\config\theme.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\theme.toml
+mklink %APPDATA%\yazi\config\package.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\package.toml
 
 REM INSTALL APPLICATIONS
 winget install OO-Software.ShutUp10
@@ -69,6 +75,9 @@ winget install Docker.DockerDesktop
 winget install Kubernetes.kind
 winget install BurntSushi.ripgrep.MSVC
 winget install junegunn.fzf
+
+REM COMMAND-LINE FILE EXPLORER
+winget install sxyazi.yazi Gyan.FFmpeg 7zip.7zip jqlang.jq oschwartz10612.Poppler sharkdp.fd BurntSushi.ripgrep.MSVC junegunn.fzf ajeetdsouza.zoxide ImageMagick.ImageMagick
 
 rem File Pilot
 curl -L "https://filepilot.tech/download/latest" -o "%USERPROFILE%\docs\bin\FPilot.exe"
