@@ -1,7 +1,5 @@
 return {
-    "kungfusheep/mfd.nvim",
+    'kungfusheep/mfd.nvim',
     priority = 1000,
-    config = function()
-        vim.cmd("colorscheme holychowders-whiteboard")
-    end,
+    config = function() vim.cmd('colorscheme holychowders-whiteboard') end,
 }
