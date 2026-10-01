@@ -68,7 +68,7 @@ o.fileformats = 'unix,dos'
 o.backspace = 'indent,eol,start'
 o.laststatus = 2
 o.showmode = false
-o.cmdheight = 0
+o.cmdheight = 1
 
 vim.opt.shortmess:append('I')
 
@@ -100,5 +100,17 @@ au('BufReadPost', {
         local mark = vim.api.nvim_buf_get_mark(0, '"')
         local lcount = vim.api.nvim_buf_line_count(0)
         if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
+    end,
+})
+
+-- Only show cursorline in focused windows
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+    callback = function()
+        vim.opt_local.cursorline = true
+    end,
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+    callback = function()
+        vim.opt_local.cursorline = false
     end,
 })

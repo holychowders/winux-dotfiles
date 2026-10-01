@@ -36,41 +36,6 @@ local function info(msg) vim.notify('INFO: ' .. msg, vim.log.levels.INFO) end
 local function warn(msg) vim.notify('WARN: ' .. msg, vim.log.levels.WARN) end
 local function error(msg) vim.notify('FAIL: ' .. msg, vim.log.levels.ERROR) end
 
---
---    -- ruff for format+check; build only if pyproject.toml present; run __main__.py or current file
---        format = function() vim.cmd("!ruff format .") end,
---        check  = function() vim.cmd("!ruff check .")  end,
---        build  = function()
---            if vim.fn.filereadable("pyproject.toml") == 1 then vim.cmd("!python -m build")
---            else warn("No build step (no pyproject.toml)") end
---        end,
---        run = function()
---            if vim.fn.filereadable("__main__.py") == 1 then vim.cmd("!python .")
---            else vim.cmd("!python " .. vim.fn.expand("%")) end
---        end,
---    },
---
---    go = {
---        format = function() vim.cmd("!gofmt -w .")    end,
---        check  = function() vim.cmd("!go vet ./...")   end,
---        build  = function() vim.cmd("!go build ./...") end,
---        run    = function() vim.cmd("!go run .")       end,
---    },
---            if not try_tools("format") then vim.cmd("!npx prettier --write .") end
---            if not try_tools("check") then vim.cmd("!npx eslint .") end
---            if not try_tools("build") then vim.cmd("!npm run build") end
---            if not try_tools("run") then vim.cmd("!node " .. vim.fn.expand("%")) end
-
---        format = function() vim.cmd("!shfmt -w "    .. vim.fn.expand("%")) end,
---        check  = function() vim.cmd("!shellcheck "  .. vim.fn.expand("%")) end,
-
---        format = function() vim.cmd("!stylua "   .. vim.fn.expand("%")) end,
---        check  = function() vim.cmd("!luacheck " .. vim.fn.expand("%")) end,
-
-local function tool_exists(name)
-    return vim.fn.filereadable('tools/' .. name .. '.bat') or vim.fn.filereadable('tools/' .. name .. '.sh') or vim.fn.filereadable('tools/' .. name)
-end
-
 local function code_action_fallback(action)
     local ft = vim.bo.filetype
     local ft_c = (ft == 'c' or ft == 'cpp')
@@ -124,39 +89,6 @@ local function try_code_tool(action)
     elseif vim.fn.filereadable(sh_bare_path) == 1 then
         vim.cmd('!' .. sh_bare_path)
         return sh_bare_path
-    end
-end
-
-local function try_code_action(action)
-    local ft = vim.bo.filetype
-    local ft_rust = (ft == 'rust')
-    local ft_java = (ft == 'java')
-    local ft_c = (ft == 'c' or ft == 'cpp')
-
-    -- TODO: See if a tool is available. If not, do default
-
-    if action == 'format' then
-        if ft_rust then
-            if vim.fn.executable('cargo') then
-                info('Format successful')
-                vim.cmd('!silent cargo fmt')
-            else
-                error('Failed to format. Cargo is not installed.')
-            end
-        elseif ft_java then
-            if vim.fn.executable('gjfmt') then
-                --info('Format successful')
-                vim.cmd('silent !gjfmt --aosp -i %') -- using google-java-format
-            else
-                error('Failed to format. google-java-format is not installed.')
-            end
-        else
-            if not try_code_tool(action) then code_action_fallback(action) end
-        end
-    elseif action == 'build' then
-        if ft_c or ft_java then try_code_tool(action) end
-    elseif action == 'run' then
-        if ft_c or ft_java then try_code_tool(action) end
     end
 end
 

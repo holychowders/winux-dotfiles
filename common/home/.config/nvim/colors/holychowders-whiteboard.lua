@@ -42,9 +42,11 @@ local c = {
     subtle = '#2E2E2E',
     visual = '#242424',
     line = '#202020',
-    cursorline = '#101010',
+    cursorline = '#020218',
 
-    border = '#2E2E2E',
+    --border = '#2E2E2E',
+    --border = '#4E4E4E',
+    border = '#202020',
     float_bg = '#1C1C1C',
 }
 
@@ -84,8 +86,8 @@ hi('CursorLineNr', { fg = c.light_grey })
 hi('SignColumn', { bg = 'NONE' })
 hi('VertSplit', { fg = c.border, bg = c.bg })
 hi('WinSeparator', { fg = c.border, bg = c.bg })
-hi('StatusLine', { fg = c.fg, bg = c.line })
-hi('StatusLineNC', { fg = c.dim, bg = c.line })
+hi('StatusLine', { fg = c.fg, bg = c.line, bold = true, underline = false })
+hi('StatusLineNC', { fg = c.fg, bg = c.line, underline = false })
 hi('TabLine', { fg = c.dim, bg = c.line })
 hi('TabLineFill', { bg = c.line })
 hi('TabLineSel', { fg = c.fg, bg = c.bg, bold = true })
