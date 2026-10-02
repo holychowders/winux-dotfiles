@@ -12,6 +12,8 @@
   required = true
 
 [core]
+  autocrlf = input
+
   # NOTE: --diff-so-fancy emulates diff-so-fancy, so other delta themes specified won't be applied
   #pager = diff-so-fancy | less --tabs=4 -RFX
   pager = delta --diff-so-fancy
