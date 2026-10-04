@@ -27,10 +27,12 @@ mklink /J "%LOCALAPPDATA%\nvim" "%USERPROFILE%\docs\cs\winux-dotfiles\common\hom
 mklink %USERPROFILE%\.gitconfig %USERPROFILE%\docs\cs\winux-dotfiles\common\home\.gitconfig
 mklink %USERPROFILE%\themes.gitconfig %USERPROFILE%\docs\cs\winux-dotfiles\common\home\themes.gitconfig
 
+mkdir %APPDATA%\yazi\config
 mklink %APPDATA%\yazi\config\yazi.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\yazi.toml
 mklink %APPDATA%\yazi\config\theme.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\theme.toml
 mklink %APPDATA%\yazi\config\package.toml %USERPROFILE%\docs\cs\winux-dotfiles\win11\yazi\package.toml
 
+mkdir %USERPROFILE%\Documents\WindowsPowerShell
 mklink %USERPROFILE%\Documents\WindowsPowerShell\MicroSoft.PowerShell_profile.ps1 %USERPROFILE%\docs\cs\winux-dotfiles\win11\MicroSoft.PowerShell_profile.ps1
 
 REM INSTALL APPLICATIONS
