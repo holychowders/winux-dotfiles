@@ -12,6 +12,14 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v A
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f
 taskkill /f /im explorer.exe && start explorer.exe
 
+REM SWAP ESCAPE AND CAPS LOCK (REQUIRES REBOOT)
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout" ^
+    /v "Scancode Map" ^
+    /t REG_BINARY ^
+    /d 0000000000000000030000003A00010001003A0000000000 ^
+    /f
+echo Swapped Caps Lock and Escape. Reboot to apply changes.
+
 REM MAKE REQUIRED DIRECTORIES (AND UPDATE PATH)
 mkdir docs\cs
 mkdir docs\bin
