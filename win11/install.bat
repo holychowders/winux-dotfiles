@@ -1,8 +1,5 @@
 #@echo off
 
-REM TODO:
-REM   FIXME: Fix Vim installation. Use Nvim for now.
-
 REM REWORK
 echo **REWORK IN PROGRESS: USE WITH CAUTION**
 echo **Exiting**
@@ -37,7 +34,9 @@ mklink %USERPROFILE%\Documents\WindowsPowerShell\MicroSoft.PowerShell_profile.ps
 
 REM INSTALL APPLICATIONS
 winget install OO-Software.ShutUp10
-winget install Microsoft.VisualStudio.2022.Community
+rem winget install Microsoft.VisualStudio.2022.Community
+winget install Microsoft.VisualStudio.2022.BuildTools --override ^
+    "--wait --passive --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows11SDK.26100"
 winget install vim.vim
 winget install Neovim.Neovim
 winget install Notepad++.Notepad++
@@ -59,7 +58,7 @@ winget install WerWolv.ImHex
 winget install UniversalCtags.Ctags
 winget install Gitleaks.Gitleaks
 
-winget install LLVM.LLVM
+rem winget install LLVM.LLVM
 winget install MSYS2.MSYS2
 winget install OpenJS.NodeJS.LTS
 
@@ -70,7 +69,7 @@ npm config set audit true
 npm config set strict-ssl true
 npm config set save-exact true
 
-winget install Python.Python.3.13
+winget install Python.Python.3.14
 winget install GoLang.Go
 winget install Rustlang.Rustup
 cargo install tree-sitter-cli
