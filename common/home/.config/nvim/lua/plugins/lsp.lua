@@ -43,6 +43,14 @@ return {
             })
 
             local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+            vim.lsp.config('clangd', {
+                cmd = {
+                    'clangd',
+                    '--query-driver=C:/msys64/clang64/bin/clang.exe,C:/msys64/clang64/bin/clang++.exe',
+                },
+            })
+
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     'clangd',
@@ -61,3 +69,4 @@ return {
         end,
     },
 }
+
