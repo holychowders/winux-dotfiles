@@ -42,6 +42,11 @@ echo "$mkdir_config"
 if [ $dry_run = false ]; then
     eval "$mkdir_config"
 fi
+
+echo "$mkdir_cgdbrc"
+if [ $dry_run = false ]; then
+    eval "$mkdir_cgdbrc"
+fi
 echo
 
 echo "$mkdir_cgdb"
@@ -266,8 +271,12 @@ if [ -n "$DISPLAY" ] || [ -n "$WAYLAND_DISPLAY" ]; then
     fi
 fi
 
-# Finishing message
-echo Install script finished
+# Finish up
+echo Install script finished. Starting new shell session.
+if [ $dry_run = false ]; then
+    exec bash -l
+fi
+
 if [ $dry_run = true ]; then
     echo "dry_run=true"
 fi

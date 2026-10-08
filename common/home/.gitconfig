@@ -83,5 +83,6 @@
   added = brightgreen
   changed = red
   untracked = yellow
+
 [credential "https://git.rfleury.com"]
 	provider = generic
