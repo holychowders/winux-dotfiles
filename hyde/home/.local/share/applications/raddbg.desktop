@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=RAD Debugger
+Comment=A native, user-mode, multi-process, graphical debugger.
+Exec=/home/holychowders/.local/bin/raddbg
+Icon=/home/holychowders/docs/cs/oss/raddebugger/data/logo.png
+Terminal=false
+Categories=Development;Debugger;

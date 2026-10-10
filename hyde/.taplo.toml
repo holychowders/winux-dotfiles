@@ -1,0 +1,18 @@
+[formatting]
+indent_string = "    "
+column_width = 120
+
+# Arrays
+array_auto_expand = true
+array_auto_collapse = true
+array_trailing_comma = true
+
+# Alignment and ordering
+align_entries = false
+align_comments = false
+reorder_keys = false
+
+# Whitespace
+allowed_blank_lines = 1
+trailing_newline = true
+crlf = false

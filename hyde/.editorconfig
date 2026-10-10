@@ -1,0 +1,25 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+minify = false
+
+[*.sh]
+shell_variant = bash
+switch_case_indent = true
+binary_next_line = false
+space_redirects = true
+keep_padding = true
+
+[*.lua]
+
+[[zsh]]
+shell_variant = zsh
+
+[*.{json,jsonc,yaml,yml}]
+indent_size = 2

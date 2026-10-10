@@ -1,0 +1,13 @@
+#:set tabstop=4
+:set print pretty on
+
+#:set disasm
+
+:set hlsearch
+:set ignorecase
+
+:set executinglinedisplay='highlight'
+:set showdebugcommands
+
+# Options: src_full, src_big, even, gdb_big, gdb_full
+:set winsplit='even'

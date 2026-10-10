@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=gf2
+Comment=A GDB frontend for Linux.
+Exec=/home/holychowders/.local/bin/gf
+Icon=applications-development
+Terminal=false
+Categories=Development;Debugger;
+
