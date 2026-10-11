@@ -98,17 +98,27 @@ install_pacman_packages() {
     sudo pacman -Syu
     printf '[DONE] Finished upgrading Pacman packages.\n'
 
+    if ((${#PACMAN_PACKAGES[@]} == 0)); then
+        return 0
+    fi
+
     printf '[NEXT] Installing Pacman packages.\n'
     sudo pacman -S --needed --noconfirm -- "${PACMAN_PACKAGES[@]}"
     rustup default stable
     printf '[DONE] Finished installing Pacman packages.\n'
 }
 install_cargo_packages() {
+    if ((${#CARGO_PACKAGES[@]} == 0)); then
+        return 0
+    fi
     printf '[NEXT] Installing Cargo packages.\n'
     cargo binstall --no-confirm --only-signed -- "${CARGO_PACKAGES[@]}"
     printf '[DONE] Finished installing Cargo packages.\n'
 }
 install_flatpak_packages() {
+    if ((${#FLATHUB_USER_PACKAGES[@]} == 0)); then
+        return 0
+    fi
     printf '[NEXT] Installing Flatpak packages.\n'
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install --or-update --user -y flathub -- "${FLATHUB_USER_PACKAGES[@]}"

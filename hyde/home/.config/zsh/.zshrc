@@ -52,8 +52,8 @@ alias n='nvim -S'
 alias chmox='chmod u+x'
 
 alias l='ls --color --group-directories-first'
-alias ls='l -a'
-alias ll='l -al'
+alias ls='ls --color --group-directories-first -a'
+alias ll='ls --color --group-directories-first -al'
 
 ###########################################################################
 ## Shell/Terminal
@@ -112,7 +112,7 @@ alias gc='git commit'
 alias gca='git commit -a'
 alias gcp='git commit -p'
 
-alias gcua='git commit -a -m update'
+alias gcau='git commit -a -m update'
 alias gcu='git commit -m update'
 
 alias gp='git pull && git push'
