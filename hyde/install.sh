@@ -6,12 +6,19 @@ set -Eeuo pipefail
 ######################################################################
 
 DOTS_DIR="$HOME/docs/cs/winux-dotfiles"
+FLATHUB_USER_PACKAGES=(
+    com.bitwarden.desktop
+    com.discordapp.Discord
+)
+CARGO_PACKAGES=(
+    #zshrs # zsh (kind of) language server required for nvim
+)
 PACMAN_PACKAGES=(
     yazi neovim tmux trash-cli man-db man-pages
     git git-delta git-lfs # git-filter-repo gitleaks
     clang cmake ninja make gdb cgdb rustup go python npm
     cloc shellcheck shfmt stylua prettier taplo-cli
-    flatpak steam ffmpeg
+    cargo-binstall flatpak steam ffmpeg
 )
 
 ######################################################################
@@ -30,6 +37,7 @@ main() {
 
     # Install Packages and Applications
     install_pacman_packages
+    install_cargo_packages
     install_flatpak_packages
     install_apps_from_source
     install_tmux_plugin_manager
@@ -95,12 +103,15 @@ install_pacman_packages() {
     rustup default stable
     printf '[DONE] Finished installing Pacman packages.\n'
 }
+install_cargo_packages() {
+    printf '[NEXT] Installing Cargo packages.\n'
+    cargo binstall --no-confirm --only-signed -- "${CARGO_PACKAGES[@]}"
+    printf '[DONE] Finished installing Cargo packages.\n'
+}
 install_flatpak_packages() {
     printf '[NEXT] Installing Flatpak packages.\n'
     flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    flatpak install --or-update --user -y flathub \
-        com.bitwarden.desktop \
-        com.discordapp.Discord
+    flatpak install --or-update --user -y flathub -- "${FLATHUB_USER_PACKAGES[@]}"
     printf '[DONE] Finished installing Flatpak packages.\n'
 }
 install_apps_from_source() {
@@ -190,7 +201,7 @@ configure_nvim_dotfiles() {
 configure_yazi_dotfiles() {
     printf '[NEXT] Configuring Yazi dotfiles.\n'
     _create_symlink "$DOTS_DIR/common/yazi" "$HOME/.config/yazi"
-    ya pkg install >/dev/null
+    ya pkg install > /dev/null
     printf '[DONE] Finished configuring Yazi dotfiles.\n'
 }
 configure_npm_dotfiles() {

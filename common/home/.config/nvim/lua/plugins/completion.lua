@@ -8,6 +8,11 @@ return {
         },
         sources = {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
+            providers = {
+                path = {
+                    opts = { show_hidden_files_by_default = true },
+                },
+            },
         },
         completion = {
             documentation = {

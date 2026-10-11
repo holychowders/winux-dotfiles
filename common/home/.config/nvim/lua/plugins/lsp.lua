@@ -51,6 +51,15 @@ return {
                 },
             })
 
+            --vim.lsp.config('zshrs', {
+            --    cmd = { 'zshrs', '--lsp' },
+            --    filetypes = { 'zsh' },
+            --    root_dir = function(bufnr, on_dir)
+            --        on_dir(vim.fn.getcwd())
+            --    end,
+            --})
+            --vim.lsp.enable('zshrs')
+
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     'clangd',

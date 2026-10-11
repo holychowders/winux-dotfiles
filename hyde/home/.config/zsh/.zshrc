@@ -34,9 +34,90 @@
 
 #  This is your file 
 # Add your configurations here
-# unset -f command_not_found_handler # Uncomment to prevent searching for commands not found in package manager
 
+###########################################################################
+## Variables
+###########################################################################
 export EDITOR=nvim
-bindkey -v # vi-style keybinds
+export PATH="$HOME/.cargo/bin:$PATH"
 
+###########################################################################
+## Misc
+###########################################################################
+alias n='nvim -S'
+
+###########################################################################
+## Misc Builtin Utilities
+###########################################################################
+alias chmox='chmod u+x'
+
+alias l='ls --color --group-directories-first'
+alias ls='l -a'
+alias ll='l -al'
+
+###########################################################################
+## Shell/Terminal
+###########################################################################
+bindkey -v # vi-style keybinds
+unset -f command_not_found_handler # prevent seeking commands not found in package manager
+alias c='clear'
+alias q='quit'
+
+alias zshrc='$EDITOR ~/.config/zsh/.zshrc'
+alias zshrcs='source ~/.config/zsh/.zshrc'
+
+###########################################################################
+## Applications
+###########################################################################
 alias bitwarden='flatpak run com.bitwarden.desktop'
+alias discord='flatpak run com.discordapp.Discord'
+
+###########################################################################
+## Navigation
+###########################################################################
+alias docs='cd ~/docs'
+alias cs='cd ~/docs/cs'
+
+###########################################################################
+## Projects
+###########################################################################
+alias loge='$EDITOR ~/docs/notes/LOG.md'
+alias rese='$EDITOR ~/docs/notes/RESOURCES.md'
+alias crefe='$EDITOR ~/docs/notes/cs/c/c.md'
+
+alias winux='cd ~/docs/cs/winux-dotfiles'
+alias lib='cd ~/docs/cs/lib'
+
+alias notes='cd ~/docs/notes'
+alias csnotes='cd ~/docs/notes/cs'
+alias cnotes='cd ~/docs/notes/cs/c'
+
+#alias brefe='glow -tl ~/docs/cs/linux-reference/other-resources/pure-bash-bible/README.md'
+#alias srefe='glow -tl ~/docs/cs/linux-reference/other-resources/pure-sh-bible/README.md'
+
+###########################################################################
+## Git
+###########################################################################
+alias g='git status --short'
+alias gg='git status'
+
+alias gd='git diff'
+alias gds='git diff --staged'
+
+alias ga='git add'
+alias gau='git add -u'
+alias gap='git add -p'
+
+alias gc='git commit'
+alias gca='git commit -a'
+alias gcp='git commit -p'
+
+alias gcua='git commit -a -m update'
+alias gcu='git commit -m update'
+
+alias gp='git pull && git push'
+alias gl='git log --oneline --max-count=10'
+alias gll='git log --oneline'
+
+alias grs='git reset --soft HEAD~1'
+alias gri='git rebase -i HEAD~5'

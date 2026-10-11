@@ -3,6 +3,9 @@ return {
     config = function()
         local fzf = require('fzf-lua')
         fzf.setup({
+            grep = {
+                hidden = true,
+            },
             awesome_colorschemes = {
                 actions = {
                     ['ctrl-d'] = false,

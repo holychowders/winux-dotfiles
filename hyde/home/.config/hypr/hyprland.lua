@@ -63,25 +63,29 @@ hl.config({
         },
     },
     general = {
-        gaps_in = 4,
-        gaps_out = 8,
+        gaps_in = 2,
+        gaps_out = 0,
         border_size = 1,
         col = {
-            active_border = "rgba(808080ff)",
+            active_border = "rgba(f0f0f0ff)",
             inactive_border = "rgba(00000000)",
         },
     },
 })
 
--- Disable laptop screen when lid closed
+---------------------------------------------------------------------------
+-- Enable/disable laptop screen when lid opened/closed
+---------------------------------------------------------------------------
 hl.bind("switch:on:Lid Switch", function()
     hl.monitor({ output = "eDP-1", disabled = true })
 end, { locked = true })
--- Enable laptop screen when lid opened
 hl.bind("switch:off:Lid Switch", function()
     hl.monitor({ output = "eDP-1", disabled = false })
 end, { locked = true })
 
+---------------------------------------------------------------------------
+-- Override default with correct backlight for device
+---------------------------------------------------------------------------
 hl.bind(
     "XF86MonBrightnessUp",
     hl.dsp.exec_cmd("brightnessctl -d intel_backlight set 5%+"),
@@ -91,4 +95,66 @@ hl.bind(
     "XF86MonBrightnessDown",
     hl.dsp.exec_cmd("brightnessctl -d intel_backlight set 5%-"),
     { locked = true, repeating = true }
+)
+
+---------------------------------------------------------------------------
+-- Vim-style keybinds
+---------------------------------------------------------------------------
+local WIN_ADJUST_INC = 30
+
+-- Vim-style window focus
+hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
+hl.unbind("SUPER + K")
+hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
+
+-- Preserve displaced HyDE shortcuts
+hl.bind("SUPER + ALT + J", hl.dsp.layout("togglesplit"))
+hl.bind("SUPER + ALT + K", hl.dsp.exec_cmd(hyde.sh.kb.switch()), { locked = true })
+hl.bind("SUPER + ALT + L", hl.dsp.exec_cmd(hyde.sh.session.lock()))
+
+-- Vim-style window resizing
+hl.bind(
+    "SUPER + SHIFT + H",
+    hl.dsp.window.resize({ x = -WIN_ADJUST_INC, y = 0, relative = true }),
+    { repeating = true }
+)
+hl.bind("SUPER + SHIFT + J", hl.dsp.window.resize({ x = 0, y = WIN_ADJUST_INC, relative = true }), { repeating = true })
+hl.unbind("SUPER + SHIFT + K")
+hl.bind(
+    "SUPER + SHIFT + K",
+    hl.dsp.window.resize({ x = 0, y = -WIN_ADJUST_INC, relative = true }),
+    { repeating = true }
+)
+hl.bind("SUPER + SHIFT + L", hl.dsp.window.resize({ x = WIN_ADJUST_INC, y = 0, relative = true }), { repeating = true })
+-- Rebind displaced calculator shortcut
+hl.bind("SUPER + ALT + SHIFT + K", hl.dsp.exec_cmd(hyde.sh.menu.calculator()))
+
+-- Vim-style tiled window repositioning
+hl.bind("SUPER + CTRL + SHIFT + H", hl.dsp.window.move({ direction = "left" }), { repeating = true })
+hl.bind("SUPER + CTRL + SHIFT + J", hl.dsp.window.move({ direction = "down" }), { repeating = true })
+hl.bind("SUPER + CTRL + SHIFT + K", hl.dsp.window.move({ direction = "up" }), { repeating = true })
+hl.bind("SUPER + CTRL + SHIFT + L", hl.dsp.window.move({ direction = "right" }), { repeating = true })
+
+-- Vim-style floating window repositioning
+hl.bind(
+    "SUPER + CTRL + ALT + H",
+    hl.dsp.window.move({ x = -WIN_ADJUST_INC, y = 0, relative = true }),
+    { repeating = true }
+)
+hl.bind(
+    "SUPER + CTRL + ALT + J",
+    hl.dsp.window.move({ x = 0, y = WIN_ADJUST_INC, relative = true }),
+    { repeating = true }
+)
+hl.bind(
+    "SUPER + CTRL + ALT + K",
+    hl.dsp.window.move({ x = 0, y = -WIN_ADJUST_INC, relative = true }),
+    { repeating = true }
+)
+hl.bind(
+    "SUPER + CTRL + ALT + L",
+    hl.dsp.window.move({ x = WIN_ADJUST_INC, y = 0, relative = true }),
+    { repeating = true }
 )
