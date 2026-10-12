@@ -16,9 +16,10 @@ CARGO_PACKAGES=(
 PACMAN_PACKAGES=(
     yazi neovim tmux trash-cli man-db man-pages
     git git-delta git-lfs # git-filter-repo gitleaks
-    clang cmake ninja make gdb cgdb rustup go python npm
+    nasm clang cmake ninja make gdb cgdb rustup go python npm
     cloc shellcheck shfmt stylua prettier taplo-cli
     cargo-binstall flatpak steam ffmpeg
+    lynis arch-audit
 )
 
 ######################################################################

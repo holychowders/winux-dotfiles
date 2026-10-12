@@ -11,11 +11,11 @@
 
 # # Helpful aliases
 # alias c='clear'                                                        # clear terminal
-# alias l='eza -lh --icons=auto'                                         # long list
-# alias ls='eza -1 --icons=auto'                                         # short list
-# alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
-# alias ld='eza -lhD --icons=auto'                                       # long list dirs
-# alias lt='eza --icons=auto --tree'                                     # list folder as tree
+alias l='eza -lh --icons=auto'                                         # long list
+alias ls='eza -1 --icons=auto'                                         # short list
+alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
+alias ld='eza -lhD --icons=auto'                                       # long list dirs
+alias lt='eza --icons=auto --tree'                                     # list folder as tree
 # alias un='$aurhelper -Rns'                                             # uninstall package
 # alias up='$aurhelper -Syu'                                             # update system/package/aur
 # alias pl='$aurhelper -Qs'                                              # list installed package
@@ -45,18 +45,28 @@ export PATH="$HOME/.cargo/bin:$PATH"
 ## Misc
 ###########################################################################
 alias n='nvim -S'
+alias dump='coredumpctl dump -o ./core'
 
 ###########################################################################
 ## Misc Builtin Utilities
 ###########################################################################
 alias chmox='chmod u+x'
 
-alias l='ls --color --group-directories-first'
-alias ls='ls --color --group-directories-first -a'
-alias ll='ls --color --group-directories-first -al'
+#alias ls='ls --color --group-directories-first'
+#alias l='ls -a'
+#alias ll='ls --color --group-directories-first -al'
 
 ###########################################################################
-## Shell/Terminal
+## System
+###########################################################################
+alias gpus="lspci -Dnn | grep -Ei 'VGA|3D|Display'" # NOTE: wakes the dGPU momentarily
+alias gpustat='cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_status' # assumes this is the NVIDI dGPU
+alias gpusleep='nvidia-smi set'
+alias batt="upower -b | grep -E 'state:|energy:|energy-rate:|time to empty:'"
+alias battmon="watch -n 3 'upower -b | grep -E \"state:|energy:|energy-rate:|time to empty:\"'"
+
+###########################################################################
+## Shell/Terminal/Environment
 ###########################################################################
 bindkey -v # vi-style keybinds
 unset -f command_not_found_handler # prevent seeking commands not found in package manager
@@ -65,6 +75,10 @@ alias q='quit'
 
 alias zshrc='$EDITOR ~/.config/zsh/.zshrc'
 alias zshrcs='source ~/.config/zsh/.zshrc'
+
+alias hyprrc='$EDITOR ~/.config/hypr/hyprland.lua'
+alias kittyrc='$EDITOR ~/.config/kitty/kitty.conf'
+alias installsh='$EDITOR ~/docs/cs/winux-dotfiles/hyde/install.sh'
 
 ###########################################################################
 ## Applications
