@@ -79,6 +79,8 @@ alias q='quit'
 alias zshrc='$EDITOR ~/.config/zsh/.zshrc'
 alias zshrcs='source ~/.config/zsh/.zshrc'
 
+alias nvimrc='$EDITOR ~/.config/nvim/'
+
 alias hyprrc='$EDITOR ~/.config/hypr/hyprland.lua'
 alias kittyrc='$EDITOR ~/.config/kitty/kitty.conf'
 alias installsh='$EDITOR ~/docs/cs/winux-dotfiles/hyde/install.sh'

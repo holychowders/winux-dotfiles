@@ -5,6 +5,7 @@ return {
     },
     config = function()
         require('aerial').setup({
+            disable_max_lines = 0,
             backends = { 'lsp', 'treesitter' },
             layout = {
                 default_direction = 'right',

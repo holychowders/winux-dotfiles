@@ -49,7 +49,7 @@ end
 
 hl.config({
     input = {
-        sensitivity = 1.00,
+        sensitivity = 0.90,
         repeat_rate = 40,
         repeat_delay = 200,
         kb_options = "caps:swapescape",
@@ -59,16 +59,16 @@ hl.config({
     },
     decoration = {
         shadow = {
-            enabled = false,
+            enabled = true,
         },
     },
     general = {
         gaps_in = 2,
-        gaps_out = 4,
+        gaps_out = 2,
         border_size = 1,
         col = {
-            --active_border = "rgba(f0f0f0ff)",
-            --inactive_border = "rgba(00000000)",
+            active_border = "rgba(808080ff)",
+            inactive_border = "rgba(00000000)",
         },
     },
 })
