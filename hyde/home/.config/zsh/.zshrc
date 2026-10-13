@@ -65,6 +65,9 @@ alias gpusleep='nvidia-smi set'
 alias batt="upower -b | grep -E 'state:|energy:|energy-rate:|time to empty:'"
 alias battmon="watch -n 3 'upower -b | grep -E \"state:|energy:|energy-rate:|time to empty:\"'"
 
+# FIXME: This is ridiculous.
+alias fixaudio="amixer -c 0 cset iface=CARD,name='Speaker Force Firmware Load' on"
+
 ###########################################################################
 ## Shell/Terminal/Environment
 ###########################################################################

@@ -84,6 +84,13 @@ hl.bind("switch:off:Lid Switch", function()
 end, { locked = true })
 
 ---------------------------------------------------------------------------
+-- Unbind redundant default volume control keys
+---------------------------------------------------------------------------
+hl.unbind("F10")
+hl.unbind("F11")
+hl.unbind("F12")
+
+---------------------------------------------------------------------------
 -- Override default with correct backlight for device
 ---------------------------------------------------------------------------
 hl.bind(

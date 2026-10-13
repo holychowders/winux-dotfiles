@@ -36,70 +36,75 @@ local function info(msg) vim.notify('INFO: ' .. msg, vim.log.levels.INFO) end
 local function warn(msg) vim.notify('WARN: ' .. msg, vim.log.levels.WARN) end
 local function error(msg) vim.notify('FAIL: ' .. msg, vim.log.levels.ERROR) end
 
-local function code_action_fallback(action)
-    local ft = vim.bo.filetype
-    local ft_c = (ft == 'c' or ft == 'cpp')
-    local ft_lua = (ft == 'lua')
+--local function code_action_fallback(action)
+--    local ft = vim.bo.filetype
+--    local ft_c = (ft == 'c' or ft == 'cpp')
+--    local ft_lua = (ft == 'lua')
+--
+--    if action == 'format' then -- Format buffer only
+--        local format_success = false
+--        if ft_c then
+--            if vim.fn.executable('clang-format') == 1 then
+--                if vim.fn.filereadable('.clang-format') == 1 then
+--                    vim.cmd('silent !clang-format -i %')
+--                    format_success = true
+--                else
+--                    local default_style = '{BasedOnStyle:WebKit, IndentWidth:4, ColumnLimit:150, PointerAlignment:Right, ReflowComments:False}'
+--                    vim.cmd('silent !clang-format -i % -style=' .. default_style)
+--                    format_success = true
+--                end
+--            end
+--        elseif ft_lua then
+--            if vim.fn.executable('stylua') == 1 then
+--                vim.cmd('silent !stylua %')
+--                format_success = true
+--            end
+--
+--            if format_success then
+--                info('Format successful')
+--                --vim.cmd("checktime") reload buffer if changed
+--            else
+--                error('No formatting tool configured for this filetype (' .. ft .. ')')
+--            end
+--        end
+--    elseif action == 'check' then
+--    elseif action == 'build' then
+--    elseif action == 'run' then
+--    else
+--        error('Tool type not configured (' .. action .. ')')
+--    end
+--end
 
-    if action == 'format' then -- Format buffer only
-        local format_success = false
-        if ft_c then
-            if vim.fn.executable('clang-format') == 1 then
-                if vim.fn.filereadable('.clang-format') == 1 then
-                    vim.cmd('silent !clang-format -i %')
-                    format_success = true
-                else
-                    local default_style = '{BasedOnStyle:WebKit, IndentWidth:4, ColumnLimit:150, PointerAlignment:Right, ReflowComments:False}'
-                    vim.cmd('silent !clang-format -i % -style=' .. default_style)
-                    format_success = true
-                end
-            end
-        elseif ft_lua then
-            if vim.fn.executable('stylua') == 1 then
-                vim.cmd('silent !stylua %')
-                format_success = true
-            end
+local function try_code_action(action)
+    local ftype = vim.bo.ft
 
-            if format_success then
-                info('Format successful')
-                --vim.cmd("checktime") reload buffer if changed
-            else
-                error('No formatting tool configured for this filetype (' .. ft .. ')')
-            end
+    -- If there's a script for it in tools/, then use it, regardless of language
+    if vim.fn.has('win32') == 1 then
+        local bat_path = vim.fn.expand('tools/' .. action .. '.bat')
+        if vim.fn.filereadable(bat_path) == 1 then
+            vim.cmd('!' .. bat_path)
         end
-    elseif action == 'check' then
-    elseif action == 'build' then
-    elseif action == 'run' then
+    elseif vim.fn.has('linux') == 1 then
+        local sh_path = vim.fn.expand('tools/' .. action .. '.sh')
+        local sh_path_bare = vim.fn.expand('tools/' .. action)
+        if vim.fn.filereadable(sh_path_bare) == 1 then
+            vim.cmd('!' .. sh_path_bare)
+        elseif vim.fn.filereadable(sh_path) == 1 then
+            vim.cmd('!' .. sh_path)
+        end
     else
-        error('Tool type not configured (' .. action .. ')')
+        echo "This action is not configured for this platform\n"
+    end
+
+    if (ftype == 'rust' or vim.fn.filereadable('Cargo.toml') == 1) then
+        vim.cmd('!' .. "cargo " .. action)
     end
 end
 
-local function try_code_tool(action)
-    local batch_path = vim.fn.expand('tools/' .. action .. '.bat')
-    local sh_path = vim.fn.expand('tools/' .. action .. '.sh')
-    local sh_bare_path = vim.fn.expand('tools/' .. action)
-
-    if vim.fn.filereadable(batch_path) == 1 then
-        vim.cmd('!' .. batch_path)
-        return batch_path
-    elseif vim.fn.filereadable(sh_path) == 1 then
-        vim.cmd('!' .. sh_path)
-        return sh_path
-    elseif vim.fn.filereadable(sh_bare_path) == 1 then
-        vim.cmd('!' .. sh_bare_path)
-        return sh_bare_path
-    end
-end
-
-local function try_code_action_2(action)
-    if not try_code_tool(action) then code_action_fallback(action) end
-end
-
-map('n', '<F5>', function() try_code_action_2('format') end)
-map('n', '<F6>', function() try_code_action_2('check') end)
-map('n', '<F7>', function() try_code_action_2('build') end)
-map('n', '<F8>', function() try_code_action_2('run') end)
+map('n', '<F5>', function() try_code_action('format') end)
+map('n', '<F6>', function() try_code_action('check') end)
+map('n', '<F7>', function() try_code_action('build') end)
+map('n', '<F8>', function() try_code_action('run') end)
 
 map('n', '<leader>p', '<Cmd>lua vim.diagnostic.enable(false)<CR>')
 map('n', '<leader>pp', '<Cmd>lua vim.diagnostic.enable(true)<CR>')
