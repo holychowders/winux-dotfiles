@@ -16,10 +16,11 @@ CARGO_PACKAGES=(
 PACMAN_PACKAGES=(
     yazi neovim tmux trash-cli man-db man-pages
     git git-delta git-lfs # git-filter-repo gitleaks
-    nasm clang cmake ninja make gdb cgdb rustup go python npm
+    nasm clang cmake ninja make gdb cgdb rustup go python npm # ccache
     cloc shellcheck shfmt stylua prettier taplo-cli
     cargo-binstall flatpak steam ffmpeg
     lynis arch-audit
+    qemu-desktop libvirt virt-manager dnsmasq iptables-nft edk2-ovmf swtpm
 )
 
 ######################################################################
@@ -105,6 +106,7 @@ install_pacman_packages() {
 
     printf '[NEXT] Installing Pacman packages.\n'
     sudo pacman -S --needed --noconfirm -- "${PACMAN_PACKAGES[@]}"
+    sudo systemctl enable --now libvirtd.socket
     rustup default stable
     printf '[DONE] Finished installing Pacman packages.\n'
 }

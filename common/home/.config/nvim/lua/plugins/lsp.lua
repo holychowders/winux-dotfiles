@@ -60,6 +60,9 @@ return {
             --})
             --vim.lsp.enable('zshrs')
 
+            --vim.lsp.enable('jdtls')
+            --vim.lsp.enable('kotlin_language_server')
+
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     'clangd',
@@ -70,6 +73,8 @@ return {
                     'bashls',
                     'marksman',
                     'lua_ls',
+                    'jdtls',
+                    'kotlin_language_server',
                 },
                 handlers = {
                     function(server) require('lspconfig')[server].setup({ capabilities = capabilities }) end,

@@ -49,8 +49,8 @@ end
 
 hl.config({
     input = {
-        sensitivity = 0.90,
-        repeat_rate = 40,
+        sensitivity = 1.00,
+        repeat_rate = 50,
         repeat_delay = 200,
         kb_options = "caps:swapescape",
         touchpad = {
