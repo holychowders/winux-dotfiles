@@ -14,13 +14,17 @@ CARGO_PACKAGES=(
     #zshrs # zsh (kind of) language server required for nvim
 )
 PACMAN_PACKAGES=(
-    yazi neovim tmux trash-cli man-db man-pages
-    git git-delta git-lfs # git-filter-repo gitleaks
-    nasm clang cmake ninja make gdb cgdb rustup go python npm # ccache
-    cloc shellcheck shfmt stylua prettier taplo-cli
-    cargo-binstall flatpak steam ffmpeg
-    lynis arch-audit
-    qemu-desktop libvirt virt-manager dnsmasq iptables-nft edk2-ovmf swtpm
+    # Optional: git-filter-repo gitleaks ccache
+
+    # CS
+    git git-delta git-lfs # Git
+    nasm clang cmake ninja make gdb cgdb rustup go python mingw-w64-gcc # Compilers, debuggers, etc
+    cloc shellcheck shfmt stylua prettier taplo-cli # Formatters, linters, etc
+    qemu-desktop libvirt virt-manager dnsmasq iptables-nft edk2-ovmf swtpm # Virtualization
+
+    lynis arch-audit clamav # Security
+    yazi neovim tmux trash-cli man-db man-pages steam ffmpeg # Misc
+    npm cargo-binstall flatpak # Package managers
 )
 
 ######################################################################

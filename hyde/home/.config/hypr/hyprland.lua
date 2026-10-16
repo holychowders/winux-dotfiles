@@ -57,20 +57,20 @@ hl.config({
             natural_scroll = true,
         },
     },
-    decoration = {
-        shadow = {
-            enabled = true,
-        },
-    },
-    general = {
-        gaps_in = 2,
-        gaps_out = 2,
-        border_size = 1,
-        col = {
-            active_border = "rgba(808080ff)",
-            inactive_border = "rgba(00000000)",
-        },
-    },
+    --decoration = {
+    --    shadow = {
+    --        enabled = false,
+    --    },
+    --},
+    --general = {
+    --    gaps_in = 2,
+    --    gaps_out = 2,
+    --    border_size = 1,
+    --    col = {
+    --        active_border = "rgba(808080ff)",
+    --        inactive_border = "rgba(00000000)",
+    --    },
+    --},
 })
 
 ---------------------------------------------------------------------------
@@ -165,3 +165,4 @@ hl.bind(
     hl.dsp.window.move({ x = WIN_ADJUST_INC, y = 0, relative = true }),
     { repeating = true }
 )
+
