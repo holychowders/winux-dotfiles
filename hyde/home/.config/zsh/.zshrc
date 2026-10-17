@@ -106,6 +106,10 @@ alias crefe='$EDITOR ~/docs/notes/cs/c/c.md'
 
 alias winux='cd ~/docs/cs/winux-dotfiles'
 alias lib='cd ~/docs/cs/lib'
+alias games='cd ~/docs/cs/games'
+alias oss='cd ~/docs/cs/oss'
+alias renderers='cd ~/docs/cs/renderers'
+alias courses='cd ~/docs/cs/courses'
 
 alias notes='cd ~/docs/notes'
 alias csnotes='cd ~/docs/notes/cs'

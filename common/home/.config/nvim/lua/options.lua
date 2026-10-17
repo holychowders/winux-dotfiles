@@ -114,3 +114,14 @@ vim.api.nvim_create_autocmd("WinLeave", {
         vim.opt_local.cursorline = false
     end,
 })
+
+
+vim.filetype.add({
+    extension = {
+        s    = "asm",
+        S    = "asm",
+        nasm = "asm",
+        fasm = "asm",
+    },
+})
+

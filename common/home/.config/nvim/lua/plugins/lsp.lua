@@ -75,6 +75,7 @@ return {
                     'lua_ls',
                     'jdtls',
                     'kotlin_language_server',
+                    'asm_lsp',
                 },
                 handlers = {
                     function(server) require('lspconfig')[server].setup({ capabilities = capabilities }) end,
