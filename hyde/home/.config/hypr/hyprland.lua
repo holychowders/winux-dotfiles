@@ -166,3 +166,7 @@ hl.bind(
     { repeating = true }
 )
 
+---------------------------------------------------------------------------
+-- Move active window out of group and tile it to the right
+---------------------------------------------------------------------------
+hl.bind("SUPER + SHIFT + O", hl.dsp.window.move({ out_of_group = "right" }))
